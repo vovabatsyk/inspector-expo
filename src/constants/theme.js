@@ -5,10 +5,11 @@ export const COLORS = {
   primary: '#0e1857',
   secondary: '#c2a213',
 
+  blue: '#1a47b8',
   white: '#FCFCFC',
   black: '#000000',
   green: '#37E39F',
-  red: '#F9A8BA',
+  red: '#b81a2f',
   gray: '#6A6A6A',
   lightGray: '#dbdbdb',
   lightGray1: '#f5f6fa',
