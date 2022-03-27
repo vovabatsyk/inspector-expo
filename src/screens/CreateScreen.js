@@ -10,6 +10,7 @@ import {
 import React from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 import { data } from '../data'
+import { ButtonPDF } from '../components/ButtonPDF'
 
 export const CreateScreen = () => {
   return (
@@ -75,9 +76,7 @@ export const CreateScreen = () => {
             />
           </View>
         </View>
-        <TouchableHighlight style={styles.button} onPress={() => alert('Save')}>
-          <Text style={{ color: COLORS.white }}>Зберегти</Text>
-        </TouchableHighlight>
+        <ButtonPDF />
       </View>
     </ScrollView>
   )
@@ -91,16 +90,9 @@ const styles = StyleSheet.create({
     marginTop: SIZES.marginLarge,
     height: SIZES.height,
     padding: SIZES.paddingLarge,
-    marginBottom: SIZES.marginLarge + 50,
   },
   center: {
     alignItems: 'center',
-  },
-  header: {
-    backgroundColor: COLORS.gray,
-    padding: SIZES.padding,
-    borderRadius: SIZES.radius,
-    marginBottom: SIZES.marginLarge,
   },
   div: {
     // marginBottom: SIZES.marginLarge,
@@ -121,12 +113,5 @@ const styles = StyleSheet.create({
     padding: SIZES.padding,
     marginTop: SIZES.margin,
     borderRadius: SIZES.radius,
-  },
-  button: {
-    width: 80,
-    borderRadius: SIZES.radius,
-    backgroundColor: COLORS.red,
-    padding: SIZES.padding,
-    marginTop: SIZES.marginLarge,
   },
 })
