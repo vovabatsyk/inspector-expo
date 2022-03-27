@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { CreateScreen } from '../screens/CreateScreen'
 import { StatisticsScreen } from '../screens/StatisticsScreen'
 import { SettingsScreen } from '../screens/SettingsScreen'
-import { COLORS } from '../constants/theme'
+import { COLORS, SIZES } from '../constants/theme'
 import { View } from 'react-native'
 
 const Tab = createBottomTabNavigator()
@@ -14,9 +14,9 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { position: 'absolute', backgroundColor: COLORS.primary },
-        tabBarActiveBackgroundColor: COLORS.blue,
-        tabBarActiveTintColor: COLORS.secondary,
+        tabBarStyle: { position: 'absolute', backgroundColor: COLORS.black },
+        tabBarActiveBackgroundColor: COLORS.gray,
+        tabBarActiveTintColor: COLORS.white,
       }}
     >
       <Tab.Screen
@@ -24,8 +24,8 @@ const Tabs = () => {
         component={CreateScreen}
         options={{
           tabBarLabel: 'Створити',
-          tabBarIcon: ({ size }) => (
-            <MaterialCommunityIcons name='plus' color={COLORS.secondary} size={size} />
+          tabBarIcon: () => (
+            <MaterialCommunityIcons name='plus' color={COLORS.secondary} size={SIZES.icon} />
           ),
         }}
       />
@@ -34,8 +34,8 @@ const Tabs = () => {
         component={StatisticsScreen}
         options={{
           tabBarLabel: 'Статистика',
-          tabBarIcon: ({ size }) => (
-            <MaterialCommunityIcons name='book' color={COLORS.secondary} size={size} />
+          tabBarIcon: () => (
+            <MaterialCommunityIcons name='book-open' color={COLORS.secondary} size={SIZES.icon} />
           ),
         }}
       />
@@ -45,8 +45,12 @@ const Tabs = () => {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Настройки',
-          tabBarIcon: ({ size }) => (
-            <MaterialCommunityIcons name='folder-settings' color={COLORS.secondary} size={size} />
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name='folder-settings'
+              color={COLORS.secondary}
+              size={SIZES.icon}
+            />
           ),
         }}
       />

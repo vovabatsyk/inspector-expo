@@ -17,6 +17,7 @@ export const COLORS = {
 export const SIZES = {
   // global sizes
   base: 8,
+  icon: 40,
   font: 14,
   radius: 10,
   padding: 5,
