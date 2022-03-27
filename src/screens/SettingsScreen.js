@@ -6,7 +6,7 @@ import { COLORS } from '../constants/theme'
 export const SettingsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={{ color: '#fff' }}>Settings</Text>
+      <Text style={{ color: '#fff' }}>В розробці SettingsScreen...</Text>
     </View>
   )
 }

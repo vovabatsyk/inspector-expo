@@ -4,6 +4,7 @@ import { COLORS, SIZES } from '../constants/theme'
 import { AppNavigation } from '../navigation/AppNavigation'
 import { screen } from '../constants/screens'
 import { clearData } from '../utils/userStorage'
+import { data } from '../data'
 
 export const AppScreen = ({ navigation }) => {
   return (
@@ -11,11 +12,15 @@ export const AppScreen = ({ navigation }) => {
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           marginTop: 70,
-          paddingRight: 50,
+          padding: SIZES.paddingLarge,
+          borderBottomWidth: 1,
+          borderBottomColor: COLORS.gray,
         }}
       >
+        <Text style={{ color: '#fff' }}>{data.user.fullName}</Text>
         <TouchableHighlight style={styles.buttonExit} onPress={() => clearData(navigation)}>
           <Text style={{ color: '#fff' }}>Вийти</Text>
         </TouchableHighlight>
@@ -29,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.black,
-    height: SIZES.height + 40,
+    height: SIZES.height,
   },
   buttonExit: {
     width: 70,

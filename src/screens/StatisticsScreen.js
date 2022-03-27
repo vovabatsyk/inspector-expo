@@ -4,22 +4,17 @@ import { COLORS, SIZES } from '../constants/theme'
 
 export const StatisticsScreen = () => {
   return (
-    <ScrollView style={styles.backgroundColor}>
-      <View style={styles.container}>
-        <Text style={{ color: '#fff' }}>В розробці...</Text>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={{ color: '#fff' }}>В розробці StatisticsScreen...</Text>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  backgroundColor: {
-    backgroundColor: COLORS.black,
-  },
   container: {
-    flexDirection: 'row',
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: SIZES.height,
+    backgroundColor: COLORS.black,
   },
 })
