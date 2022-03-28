@@ -4,7 +4,7 @@ import { COLORS, SIZES } from '../constants/theme'
 import { AppNavigation } from '../navigation/AppNavigation'
 import { screen } from '../constants/screens'
 import { clearData } from '../utils/userStorage'
-import { data } from '../data'
+import { user } from '../data'
 
 export const AppScreen = ({ navigation }) => {
   return (
@@ -20,7 +20,7 @@ export const AppScreen = ({ navigation }) => {
           borderBottomColor: COLORS.gray,
         }}
       >
-        <Text style={{ color: '#fff' }}>{data.user.fullName}</Text>
+        <Text style={{ color: '#fff' }}>{user.fullName}</Text>
         <TouchableHighlight style={styles.buttonExit} onPress={() => clearData(navigation)}>
           <Text style={{ color: '#fff' }}>Вийти</Text>
         </TouchableHighlight>

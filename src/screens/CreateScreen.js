@@ -1,19 +1,48 @@
-import { Text, StyleSheet, ScrollView, TextInput, View, TouchableHighlight } from 'react-native'
-import React from 'react'
+import {
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  View,
+  TouchableHighlight,
+  Modal,
+} from 'react-native'
+import React, { useState } from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 import { ButtonPDF } from '../components/ButtonPDF'
+import { ModalPickerViolationArticle } from '../components/ModalPickerViolationArticle'
 
 export const CreateScreen = () => {
+  const [selectedViolationArticle, setSelectedViolationArticle] = useState(null)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const changeModalVisibility = (bool) => {
+    setIsModalVisible(bool)
+  }
+
+  const setViolationArticle = (data) => {
+    setSelectedViolationArticle(data.title)
+  }
+
   return (
     <ScrollView style={styles.backgroundColor}>
       <View style={styles.containerSize}>
         <View>
           <Text style={styles.text}>Оберіть статтю із списку:</Text>
-          <TextInput
-            placeholderTextColor={COLORS.gray}
-            placeholder='Оберіть статтю із списку'
-            style={styles.input}
-          />
+          <TouchableHighlight style={styles.input} onPress={() => changeModalVisibility(true)}>
+            <Text style={{ color: COLORS.white }}>{selectedViolationArticle}</Text>
+          </TouchableHighlight>
+          <Modal
+            transparent={true}
+            animationType='fade'
+            visible={isModalVisible}
+            nRequestClose={() => changeModalVisibility(false)}
+          >
+            <ModalPickerViolationArticle
+              changeModalVisibility={changeModalVisibility}
+              setViolationArticle={setViolationArticle}
+            />
+          </Modal>
         </View>
         <View>
           <Text style={styles.text}>Державний номерний знак</Text>
