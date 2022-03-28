@@ -11,10 +11,12 @@ import React, { useState } from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 import { ButtonPDF } from '../components/ButtonPDF'
 import { ModalPickerViolationArticle } from '../components/ModalPickerViolationArticle'
+import { ViolationPrice } from '../components/ViolationPrice'
 
 export const CreateScreen = () => {
-  const [selectedViolationArticle, setSelectedViolationArticle] = useState(null)
+  const [selectedViolationArticle, setSelectedViolationArticle] = useState('')
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [violationData, setViolationData] = useState(null)
 
   const changeModalVisibility = (bool) => {
     setIsModalVisible(bool)
@@ -22,6 +24,7 @@ export const CreateScreen = () => {
 
   const setViolationArticle = (data) => {
     setSelectedViolationArticle(data.title)
+    setViolationData(data)
   }
 
   return (
@@ -43,6 +46,7 @@ export const CreateScreen = () => {
               setViolationArticle={setViolationArticle}
             />
           </Modal>
+          {violationData ? <ViolationPrice violationData={violationData} /> : null}
         </View>
         <View>
           <Text style={styles.text}>Державний номерний знак</Text>
