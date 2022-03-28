@@ -5,10 +5,11 @@ export const COLORS = {
   primary: '#0e1857',
   secondary: '#c2a213',
 
+  blue: '#1a47b8',
   white: '#FCFCFC',
   black: '#000000',
   green: '#37E39F',
-  red: '#F9A8BA',
+  red: '#b81a2f',
   gray: '#6A6A6A',
   lightGray: '#dbdbdb',
   lightGray1: '#f5f6fa',
@@ -16,9 +17,13 @@ export const COLORS = {
 export const SIZES = {
   // global sizes
   base: 8,
+  icon: 40,
   font: 14,
-  radius: 20,
-  padding: 24,
+  radius: 10,
+  padding: 5,
+  paddingLarge: 15,
+  marginLarge: 15,
+  margin: 5,
 
   // font sizes
   h1: 30,
