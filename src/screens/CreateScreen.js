@@ -1,37 +1,30 @@
-import {
-  Text,
-  StyleSheet,
-  ScrollView,
-  TextInput,
-  View,
-  Button,
-  TouchableHighlight,
-} from 'react-native'
+import { Text, StyleSheet, ScrollView, TextInput, View, TouchableHighlight } from 'react-native'
 import React from 'react'
 import { COLORS, SIZES } from '../constants/theme'
-import { data } from '../data'
 import { ButtonPDF } from '../components/ButtonPDF'
 
 export const CreateScreen = () => {
   return (
     <ScrollView style={styles.backgroundColor}>
-      <View style={styles.container}>
-        <View style={styles.div}>
-          <View>
-            <Text style={styles.text}>Оберіть статтю із списку:</Text>
-            <TextInput
-              placeholderTextColor={COLORS.gray}
-              placeholder='Оберіть статтю із списку'
-              style={styles.input}
-            />
-          </View>
-          <View>
-            <Text style={styles.text}>Державний номерний знак</Text>
-            <TextInput
-              placeholderTextColor={COLORS.gray}
-              placeholder='Державний номерний знак'
-              style={styles.input}
-            />
+      <View style={styles.containerSize}>
+        <View>
+          <Text style={styles.text}>Оберіть статтю із списку:</Text>
+          <TextInput
+            placeholderTextColor={COLORS.gray}
+            placeholder='Оберіть статтю із списку'
+            style={styles.input}
+          />
+        </View>
+        <View>
+          <Text style={styles.text}>Державний номерний знак</Text>
+          <TextInput
+            placeholderTextColor={COLORS.gray}
+            placeholder='Державний номерний знак'
+            style={styles.input}
+          />
+        </View>
+        <View style={styles.container}>
+          <View style={styles.inputWith}>
             <Text style={styles.text}>Марка</Text>
             <TextInput
               placeholderTextColor={COLORS.gray}
@@ -45,18 +38,15 @@ export const CreateScreen = () => {
               style={styles.input}
             />
           </View>
-        </View>
-        <View style={styles.div}>
-          <View>
-            <Text style={styles.text}>Оберіть статтю із списку:</Text>
-            <TextInput
-              placeholderTextColor={COLORS.gray}
-              placeholder='Оберіть статтю із списку'
-              style={styles.input}
-            />
+          <View style={styles.buttonWith}>
+            <TouchableHighlight style={styles.button}>
+              <Text style={styles.buttonText}>==</Text>
+            </TouchableHighlight>
           </View>
-          <View style={styles.delimiter}></View>
-          <View>
+        </View>
+        <View style={styles.delimiter}></View>
+        <View style={styles.container}>
+          <View style={styles.inputWith}>
             <Text style={styles.text}>Фабула</Text>
             <TextInput
               placeholderTextColor={COLORS.gray}
@@ -64,16 +54,26 @@ export const CreateScreen = () => {
               style={styles.input}
             />
           </View>
+          <View style={styles.buttonWith}>
+            <TouchableHighlight style={styles.button}>
+              <Text style={styles.buttonText}>==</Text>
+            </TouchableHighlight>
+          </View>
         </View>
-        <View style={styles.div}>
-          <View style={styles.delimiter}></View>
-          <View>
+        <View style={styles.delimiter}></View>
+        <View style={styles.container}>
+          <View style={styles.inputWith}>
             <Text style={styles.text}>Адреса правопорушення</Text>
             <TextInput
               placeholderTextColor={COLORS.gray}
               placeholder='Адреса'
               style={styles.input}
             />
+          </View>
+          <View style={styles.buttonWith}>
+            <TouchableHighlight style={styles.button}>
+              <Text style={styles.buttonText}>==</Text>
+            </TouchableHighlight>
           </View>
         </View>
         <ButtonPDF />
@@ -86,16 +86,18 @@ const styles = StyleSheet.create({
   backgroundColor: {
     backgroundColor: COLORS.black,
   },
-  container: {
+  containerSize: {
     marginTop: SIZES.marginLarge,
     height: SIZES.height,
     padding: SIZES.paddingLarge,
   },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+  },
   center: {
     alignItems: 'center',
-  },
-  div: {
-    // marginBottom: SIZES.marginLarge,
   },
   delimiter: {
     height: 2,
@@ -113,5 +115,23 @@ const styles = StyleSheet.create({
     padding: SIZES.padding,
     marginTop: SIZES.margin,
     borderRadius: SIZES.radius,
+    color: COLORS.white,
+  },
+  inputWith: {
+    width: '80%',
+  },
+  button: {
+    backgroundColor: COLORS.gray,
+    alignItems: 'center',
+    borderRadius: SIZES.radius,
+    justifyContent: 'center',
+    height: SIZES.icon,
+  },
+  buttonWith: {
+    width: '15%',
+  },
+  buttonText: {
+    color: COLORS.white,
+    fontSize: SIZES.h2,
   },
 })
