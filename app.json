@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "inspector-expo",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/icon.png",
     "version": "1.0.0",
     "slug": "inspector-expo",
     "privacy": "public",
