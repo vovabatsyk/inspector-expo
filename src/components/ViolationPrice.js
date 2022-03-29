@@ -8,7 +8,6 @@ export const ViolationPrice = ({ violationData }) => {
   const onChangePrice = (price) => {
     const calcPrice = price * 20
     setNumber(calcPrice)
-    console.log(calcPrice)
   }
   return (
     <View>
