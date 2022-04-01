@@ -1,8 +1,37 @@
 import { View, Text, TouchableHighlight, StyleSheet, TextInput } from 'react-native'
-import React from 'react'
+import * as Location from 'expo-location'
+import React, { useState } from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 
 export const ViolationAddress = () => {
+  const [location, setLocation] = useState(null)
+
+  const getLocation = async () => {
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync()
+      if (status !== 'granted') {
+        alert('Permission to access location was denied')
+        return
+      }
+
+      let { coords } = await Location.getCurrentPositionAsync()
+
+      if (coords) {
+        const { latitude, longitude } = coords
+        let response = await Location.reverseGeocodeAsync({
+          latitude,
+          longitude,
+        })
+
+        for (let item of response) {
+          let address = `м. ${item.city}, ${item.street}, ${item.name}`
+          setLocation(address)
+        }
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
   return (
     <View style={styles.container}>
       <View
@@ -14,10 +43,16 @@ export const ViolationAddress = () => {
       >
         <View style={styles.inputWith}>
           <Text style={styles.text}>Адреса правопорушення</Text>
-          <TextInput placeholderTextColor={COLORS.gray} placeholder='Адреса' style={styles.input} />
+          <TextInput
+            placeholderTextColor={COLORS.gray}
+            placeholder='Адреса'
+            style={styles.input}
+            value={location}
+            onChangeText={setLocation}
+          />
         </View>
         <View style={styles.buttonWith}>
-          <TouchableHighlight style={styles.button}>
+          <TouchableHighlight style={styles.button} onPress={getLocation}>
             <Text style={styles.buttonText}>==</Text>
           </TouchableHighlight>
         </View>
