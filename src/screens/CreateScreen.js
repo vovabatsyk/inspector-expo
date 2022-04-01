@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     marginTop: SIZES.marginLarge,
   },
   input: {
-    borderColor: COLORS.secondary,
+    borderColor: COLORS.gray,
     borderWidth: 1,
     padding: SIZES.padding,
     marginTop: SIZES.margin,

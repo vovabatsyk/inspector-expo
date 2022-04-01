@@ -1,4 +1,12 @@
-import { TextInput, Text, SafeAreaView, StyleSheet, View, TouchableHighlight } from 'react-native'
+import {
+  TextInput,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  Image,
+} from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 import Icon from '@expo/vector-icons/FontAwesome5'
@@ -26,7 +34,10 @@ export const LoginScreen = ({ navigation }) => {
   }, [])
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Вхід</Text>
+      <Image
+        source={require('../../assets/logo.png')}
+        style={{ width: SIZES.width / 4, height: SIZES.height / 5, marginBottom: 30 }}
+      />
       <View style={styles.inputWrapper}>
         <Icon name='user' size={30} color={COLORS.secondary} />
         <TextInput
