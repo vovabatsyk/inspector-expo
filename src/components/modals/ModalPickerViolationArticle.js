@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { COLORS, SIZES } from '../constants/theme'
-import { violation_article } from '../data'
+import { COLORS, SIZES } from '../../constants/theme'
+import { violation_article } from '../../data'
 
 export const ModalPickerViolationArticle = (props) => {
   const onPresItem = (data) => {
