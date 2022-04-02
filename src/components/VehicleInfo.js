@@ -1,12 +1,18 @@
 import { View, Text, TextInput, StyleSheet, TouchableHighlight, Modal } from 'react-native'
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCarNumber } from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import { ModalPickerCarMark } from './modals/ModalPickerCarMark'
 
 export const VehicleInfo = () => {
+  const { carName } = useSelector((state) => state.violationReducer)
+  const { name, password } = useSelector((state) => state.userReducer)
+
+  const dispatch = useDispatch()
+
   const [selectedCarMark, setSelectedCarMark] = useState('')
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [violationData, setViolationData] = useState(null)
 
   const changeModalVisibility = (bool) => {
     setIsModalVisible(bool)
@@ -14,7 +20,6 @@ export const VehicleInfo = () => {
 
   const getSelectedCarMark = (data) => {
     setSelectedCarMark(data.name)
-    setViolationData(data)
   }
 
   return (
@@ -25,6 +30,8 @@ export const VehicleInfo = () => {
           placeholderTextColor={COLORS.gray}
           placeholder='Державний номерний знак'
           style={styles.input}
+          value={carName}
+          onChangeText={(value) => dispatch(setCarNumber(value))}
         />
       </View>
       <View

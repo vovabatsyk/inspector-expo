@@ -1,6 +1,8 @@
 export const SET_NAME = 'SET_NAME'
 export const SET_PASSWORD = 'SET_PASSWORD'
 
+export const SET_CAR_NUMBER = 'SET_CAR_NUMBER'
+
 export const setName = (name) => (dispatch) => {
   dispatch({
     type: SET_NAME,
@@ -12,5 +14,12 @@ export const setPassword = (password) => (dispatch) => {
   dispatch({
     type: SET_PASSWORD,
     payload: password,
+  })
+}
+
+export const setCarNumber = (carNumber) => (dispatch) => {
+  dispatch({
+    type: SET_CAR_NUMBER,
+    payload: carNumber,
   })
 }

@@ -3,8 +3,12 @@ import React from 'react'
 import * as Print from 'expo-print'
 import { shareAsync } from 'expo-sharing'
 import { COLORS, SIZES } from '../constants/theme'
+import { useSelector } from 'react-redux'
 
-const html = `
+export const ButtonPDF = () => {
+  const { carNumber } = useSelector((state) => state.violationReducer)
+
+  const html = `
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
@@ -16,11 +20,10 @@ const html = `
     <img
       src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
       style="width: 90vw;" />
+    ${carNumber}
   </body>
 </html>
 `
-
-export const ButtonPDF = () => {
   const print = async () => {
     // On iOS/android prints the given html. On web prints the HTML from the current page.
     await Print.printAsync({
