@@ -9,12 +9,13 @@ export const ViolationAddress = () => {
   const getLocation = async () => {
     try {
       let { status } = await Location.requestForegroundPermissionsAsync()
+      alert(status)
       if (status !== 'granted') {
         alert('Permission to access location was denied')
         return
       }
 
-      let { coords } = await Location.getCurrentPositionAsync()
+      let { coords } = await Location.getCurrentPositionAsync({ enableHighAccuracy: true })
 
       if (coords) {
         const { latitude, longitude } = coords
@@ -24,7 +25,7 @@ export const ViolationAddress = () => {
         })
 
         for (let item of response) {
-          let address = `м. ${item.city}, ${item.street}, ${item.name}`
+          let address = `${item.street}, ${item.name}`
           setLocation(address)
         }
       }

@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.black,
-    height: SIZES.height,
   },
   buttonExit: {
     width: 70,

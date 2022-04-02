@@ -1,8 +1,22 @@
-import { View, Text, TextInput, StyleSheet, TouchableHighlight } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput, StyleSheet, TouchableHighlight, Modal } from 'react-native'
+import React, { useState } from 'react'
 import { COLORS, SIZES } from '../constants/theme'
+import { ModalPickerCarMark } from './modals/ModalPickerCarMark'
 
 export const VehicleInfo = () => {
+  const [selectedCarMark, setSelectedCarMark] = useState('')
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [violationData, setViolationData] = useState(null)
+
+  const changeModalVisibility = (bool) => {
+    setIsModalVisible(bool)
+  }
+
+  const getSelectedCarMark = (data) => {
+    setSelectedCarMark(data.name)
+    setViolationData(data)
+  }
+
   return (
     <View style={styles.container}>
       <View style={{ width: SIZES.width - SIZES.paddingLarge }}>
@@ -13,7 +27,6 @@ export const VehicleInfo = () => {
           style={styles.input}
         />
       </View>
-
       <View
         style={{
           width: SIZES.width - SIZES.paddingLarge,
@@ -23,12 +36,28 @@ export const VehicleInfo = () => {
       >
         <View style={styles.inputWith}>
           <Text style={styles.text}>Марка</Text>
-          <TextInput placeholderTextColor={COLORS.gray} placeholder='Марка' style={styles.input} />
+          <TextInput
+            placeholderTextColor={COLORS.gray}
+            placeholder='Марка'
+            style={styles.input}
+            value={selectedCarMark}
+          />
         </View>
         <View style={styles.buttonWith}>
-          <TouchableHighlight style={styles.button}>
+          <TouchableHighlight style={styles.button} onPress={() => changeModalVisibility(true)}>
             <Text style={styles.buttonText}>==</Text>
           </TouchableHighlight>
+          <Modal
+            transparent={true}
+            animationType='fade'
+            visible={isModalVisible}
+            nRequestClose={() => changeModalVisibility(false)}
+          >
+            <ModalPickerCarMark
+              changeModalVisibility={changeModalVisibility}
+              getSelectedCarMark={getSelectedCarMark}
+            />
+          </Modal>
         </View>
       </View>
 

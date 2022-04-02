@@ -8,6 +8,7 @@ import { VehicleInfo } from '../components/VehicleInfo'
 import { ViolationName } from '../components/ViolationName'
 import { ViolationAddress } from '../components/ViolationAddress'
 import { ViolationArticle } from '../components/ViolationArticle'
+import { ViolationImages } from '../components/ViolationImages'
 
 export const CreateScreen = () => {
   return (
@@ -27,6 +28,10 @@ export const CreateScreen = () => {
 
         <View style={styles.delimiter}></View>
 
+        {/* <ViolationImages />
+
+        <View style={styles.delimiter}></View> */}
+
         <ButtonPDF />
       </View>
     </ScrollView>
@@ -39,8 +44,8 @@ const styles = StyleSheet.create({
   },
   containerSize: {
     marginTop: SIZES.marginLarge,
-    height: SIZES.height,
     padding: SIZES.paddingLarge,
+    height: SIZES.height + 100,
   },
 
   delimiter: {

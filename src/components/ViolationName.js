@@ -1,8 +1,21 @@
-import { View, Text, StyleSheet, TouchableHighlight, TextInput } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableHighlight, TextInput, Modal } from 'react-native'
+import React, { useState } from 'react'
 import { COLORS, SIZES } from '../constants/theme'
+import { ModalPickerViolationName } from './modals/ModalPickerViolationName'
 
 export const ViolationName = () => {
+  const [selectedViolationName, setSelectedViolationName] = useState('')
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [violationData, setViolationData] = useState(null)
+
+  const changeModalVisibility = (bool) => {
+    setIsModalVisible(bool)
+  }
+
+  const setViolationName = (data) => {
+    setSelectedViolationName(data.description)
+    setViolationData(data)
+  }
   return (
     <View style={styles.container}>
       <View
@@ -20,12 +33,24 @@ export const ViolationName = () => {
             style={styles.input}
             multiline={true}
             numberOfLines={3}
+            value={selectedViolationName}
           />
         </View>
         <View style={styles.buttonWith}>
-          <TouchableHighlight style={styles.button}>
+          <TouchableHighlight style={styles.button} onPress={() => changeModalVisibility(true)}>
             <Text style={styles.buttonText}>==</Text>
           </TouchableHighlight>
+          <Modal
+            transparent={true}
+            animationType='fade'
+            visible={isModalVisible}
+            nRequestClose={() => changeModalVisibility(false)}
+          >
+            <ModalPickerViolationName
+              changeModalVisibility={changeModalVisibility}
+              setViolationName={setViolationName}
+            />
+          </Modal>
         </View>
       </View>
     </View>
@@ -50,6 +75,7 @@ const styles = StyleSheet.create({
     marginTop: SIZES.margin,
     borderRadius: SIZES.radius,
     color: COLORS.white,
+    maxHeight: 100,
   },
   inputWith: {
     width: '80%',
