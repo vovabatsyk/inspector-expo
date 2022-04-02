@@ -41,6 +41,7 @@ export const VehicleInfo = () => {
             placeholder='Марка'
             style={styles.input}
             value={selectedCarMark}
+            onChangeText={setSelectedCarMark}
           />
         </View>
         <View style={styles.buttonWith}>

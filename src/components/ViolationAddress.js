@@ -9,7 +9,6 @@ export const ViolationAddress = () => {
   const getLocation = async () => {
     try {
       let { status } = await Location.requestForegroundPermissionsAsync()
-      alert(status)
       if (status !== 'granted') {
         alert('Permission to access location was denied')
         return

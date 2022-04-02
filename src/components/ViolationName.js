@@ -34,6 +34,7 @@ export const ViolationName = () => {
             multiline={true}
             numberOfLines={3}
             value={selectedViolationName}
+            onChangeText={setSelectedViolationName}
           />
         </View>
         <View style={styles.buttonWith}>
