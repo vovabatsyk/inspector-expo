@@ -1,28 +1,24 @@
 import { View, Text, TouchableHighlight, Modal, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { ModalPickerViolationArticle } from './modals/ModalPickerViolationArticle'
 import { ViolationPrice } from './ViolationPrice'
 import { COLORS, SIZES } from '../constants/theme'
 
 export const ViolationArticle = () => {
-  const [selectedViolationArticle, setSelectedViolationArticle] = useState('')
+  const { violationArticle } = useSelector((state) => state.violationReducer)
+
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [violationData, setViolationData] = useState(null)
 
   const changeModalVisibility = (bool) => {
     setIsModalVisible(bool)
-  }
-
-  const setViolationArticle = (data) => {
-    setSelectedViolationArticle(data.title)
-    setViolationData(data)
   }
 
   return (
     <View>
       <Text style={styles.text}>Оберіть статтю із списку:</Text>
       <TouchableHighlight style={styles.input} onPress={() => changeModalVisibility(true)}>
-        <Text style={{ color: COLORS.white }}>{selectedViolationArticle}</Text>
+        <Text style={{ color: COLORS.white }}>{violationArticle.title}</Text>
       </TouchableHighlight>
       <Modal
         transparent={true}
@@ -30,12 +26,9 @@ export const ViolationArticle = () => {
         visible={isModalVisible}
         nRequestClose={() => changeModalVisibility(false)}
       >
-        <ModalPickerViolationArticle
-          changeModalVisibility={changeModalVisibility}
-          setViolationArticle={setViolationArticle}
-        />
+        <ModalPickerViolationArticle changeModalVisibility={changeModalVisibility} />
       </Modal>
-      {violationData ? <ViolationPrice violationData={violationData} /> : null}
+      <ViolationPrice price={violationArticle.price} />
     </View>
   )
 }

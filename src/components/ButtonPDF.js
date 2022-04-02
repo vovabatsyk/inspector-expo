@@ -6,7 +6,7 @@ import { COLORS, SIZES } from '../constants/theme'
 import { useSelector } from 'react-redux'
 
 export const ButtonPDF = () => {
-  const { carNumber } = useSelector((state) => state.violationReducer)
+  const { carNumber, violationArticle } = useSelector((state) => state.violationReducer)
 
   const html = `
 <html>
@@ -21,16 +21,11 @@ export const ButtonPDF = () => {
       src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
       style="width: 90vw;" />
     ${carNumber}
+    ${violationArticle.title}
+    ${violationArticle.price}
   </body>
 </html>
 `
-  const print = async () => {
-    // On iOS/android prints the given html. On web prints the HTML from the current page.
-    await Print.printAsync({
-      html,
-      printerUrl: selectedPrinter?.url, // iOS only
-    })
-  }
 
   const printToFile = async () => {
     const { uri } = await Print.printToFileAsync({
