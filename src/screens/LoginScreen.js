@@ -8,25 +8,30 @@ import {
   Image,
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setName, setPassword } from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import Icon from '@expo/vector-icons/FontAwesome5'
 import { customUser, getData, storeData } from '../utils/userStorage'
 import { screen } from '../constants/screens'
 
 export const LoginScreen = ({ navigation }) => {
+  const { name, password } = useSelector((state) => state.userReducer)
+  const dispatch = useDispatch()
+
   const [userName, setUserName] = useState('')
   const [userPassword, setUserPassword] = useState('')
 
   const isUser = () => {
-    if (userName === customUser.name && userPassword === customUser.password) {
+    if (name === customUser.name && password === customUser.password) {
       storeData('user')
       navigation.navigate(screen.APP_SCREEN)
     } else {
       alert('Не правельний логін або пароль')
     }
 
-    setUserName('')
-    setUserPassword('')
+    // setUserName('')
+    // setUserPassword('')
   }
 
   useEffect(() => {
@@ -43,9 +48,9 @@ export const LoginScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder='логін'
-          value={userName}
+          value={name}
           placeholderTextColor={COLORS.secondary}
-          onChangeText={(e) => setUserName(e)}
+          onChangeText={(e) => dispatch(setName(e))}
         />
       </View>
       <View style={styles.inputWrapper}>
@@ -56,8 +61,8 @@ export const LoginScreen = ({ navigation }) => {
           placeholder='пароль'
           placeholderTextColor={COLORS.secondary}
           secureTextEntry
-          value={userPassword}
-          onChangeText={(e) => setUserPassword(e)}
+          value={password}
+          onChangeText={(e) => dispatch(setPassword(e))}
         />
       </View>
       <View style={styles.buttonWrapper}>
