@@ -1,10 +1,12 @@
 export const SET_NAME = 'SET_NAME'
 export const SET_PASSWORD = 'SET_PASSWORD'
 
-// ДНЗ авто
+//  ДНЗ авто
 export const SET_CAR_NUMBER = 'SET_CAR_NUMBER'
 //  стаття порушення
 export const SET_VIOLATION_ARTICLE = 'SET_VIOLATION_ARTICLE'
+//  адрес порушення
+export const SET_VIOLATION_ADDRESS = 'SET_VIOLATION_ADDRESS'
 
 export const setName = (name) => (dispatch) => {
   dispatch({
@@ -31,5 +33,12 @@ export const setViolationArticle = (violationArticle) => (dispatch) => {
   dispatch({
     type: SET_VIOLATION_ARTICLE,
     payload: violationArticle,
+  })
+}
+
+export const setViolationAddress = (violationAddress) => (dispatch) => {
+  dispatch({
+    type: SET_VIOLATION_ADDRESS,
+    payload: violationAddress,
   })
 }

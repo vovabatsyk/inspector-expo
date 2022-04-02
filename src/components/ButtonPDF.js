@@ -6,7 +6,9 @@ import { COLORS, SIZES } from '../constants/theme'
 import { useSelector } from 'react-redux'
 
 export const ButtonPDF = () => {
-  const { carNumber, violationArticle } = useSelector((state) => state.violationReducer)
+  const { carNumber, violationArticle, violationAddress } = useSelector(
+    (state) => state.violationReducer
+  )
 
   const html = `
 <html>
@@ -23,6 +25,7 @@ export const ButtonPDF = () => {
     ${carNumber}
     ${violationArticle.title}
     ${violationArticle.price}
+    ${violationAddress}
   </body>
 </html>
 `

@@ -1,4 +1,10 @@
-import { SET_NAME, SET_PASSWORD, SET_CAR_NUMBER, SET_VIOLATION_ARTICLE } from './actions'
+import {
+  SET_NAME,
+  SET_PASSWORD,
+  SET_CAR_NUMBER,
+  SET_VIOLATION_ARTICLE,
+  SET_VIOLATION_ADDRESS,
+} from './actions'
 
 const initialUserState = {
   name: '',
@@ -12,6 +18,7 @@ const initialViolationState = {
     price: 0,
     payParking: false,
   },
+  violationAddress: '',
 }
 
 export const userReducer = (state = initialUserState, action) => {
@@ -33,6 +40,9 @@ export const violationReducer = (state = initialViolationState, action) => {
 
     case SET_VIOLATION_ARTICLE:
       return { ...state, violationArticle: action.payload }
+
+    case SET_VIOLATION_ADDRESS:
+      return { ...state, violationAddress: action.payload }
 
     default:
       return state
