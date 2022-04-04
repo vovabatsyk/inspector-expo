@@ -1,34 +1,60 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { MARKS_URI, setCarMark } from '../../redux/actions'
 import { vehicles_mark } from '../../data'
 import { COLORS, SIZES } from '../../constants/theme'
+import axios from 'axios'
 
-export const ModalPickerCarMark = (props) => {
-  const onPresItem = (data) => {
-    props.getSelectedCarMark(data)
-    props.changeModalVisibility(false)
-  }
-  return (
-    <View style={styles.container}>
-      <View style={styles.modal}>
-        <ScrollView>
-          {vehicles_mark.map((item) => (
-            <TouchableOpacity key={item.id} onPress={() => onPresItem(item)} style={styles.item}>
-              <View>
-                <Text style={styles.itemText}>{item.name}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-        <TouchableOpacity
-          style={styles.buttonCancel}
-          onPress={() => props.changeModalVisibility(false)}
-        >
-          <Text style={{ color: COLORS.white, fontSize: SIZES.h3 }}>Скасувати</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  )
+export const ModalPickerCarMark = props => {
+	const dispatch = useDispatch()
+
+	const [marks, setMarks] = useState([
+		{
+			name: '',
+			value: ''
+		}
+	])
+	useEffect(() => {
+		try {
+			axios.get(MARKS_URI).then(res => {
+				setMarks(res.data)
+			})
+		} catch (error) {
+			alert(error)
+		}
+	}, [])
+
+	return (
+		<View style={styles.container}>
+			<View style={styles.modal}>
+				<ScrollView>
+					{marks.map((item, index) => (
+						<TouchableOpacity
+							key={index}
+							onPress={() => {
+								dispatch(setCarMark(item.name))
+								props.changeModalVisibility(false)
+							}}
+							style={styles.item}
+						>
+							<View>
+								<Text style={styles.itemText}>{item.name}</Text>
+							</View>
+						</TouchableOpacity>
+					))}
+				</ScrollView>
+				<TouchableOpacity
+					style={styles.buttonCancel}
+					onPress={() => props.changeModalVisibility(false)}
+				>
+					<Text style={{ color: COLORS.white, fontSize: SIZES.h3 }}>
+						Скасувати
+					</Text>
+				</TouchableOpacity>
+			</View>
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({
