@@ -13,14 +13,14 @@ export const ViolationPrice = ({ price }) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.black,
-    padding: SIZES.paddingLarge,
-    borderWidth: 2,
-    borderColor: COLORS.red,
-    borderRadius: SIZES.radius,
-    marginTop: SIZES.margin,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+	container: {
+		backgroundColor: COLORS.black,
+		padding: SIZES.paddingLarge,
+		borderWidth: 2,
+		borderColor: COLORS.green,
+		borderRadius: SIZES.radius,
+		marginTop: SIZES.margin,
+		justifyContent: 'center',
+		alignItems: 'center'
+	}
 })

@@ -45,16 +45,17 @@ export const ButtonPDF = () => {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    padding: SIZES.padding,
-    backgroundColor: COLORS.red,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: SIZES.radius,
-    marginTop: SIZES.marginLarge,
-  },
-  text: {
-    fontSize: SIZES.h3,
-    color: COLORS.white,
-  },
+	button: {
+		padding: SIZES.padding,
+		backgroundColor: COLORS.green,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: SIZES.radius,
+		margin: SIZES.marginLarge,
+		padding: SIZES.paddingLarge
+	},
+	text: {
+		fontSize: SIZES.h3,
+		color: COLORS.white
+	}
 })

@@ -18,26 +18,29 @@ export const AppScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: 70,
-          padding: SIZES.paddingLarge,
-          borderBottomWidth: 1,
-          borderBottomColor: COLORS.gray,
-        }}
-      >
-        <Text style={{ color: '#fff' }}>{user.fullName}</Text>
-        <TouchableHighlight style={styles.buttonExit} onPress={logout}>
-          <Text style={{ color: '#fff' }}>Вийти</Text>
-        </TouchableHighlight>
-      </View>
-      <AppNavigation />
-    </SafeAreaView>
-  )
+		<SafeAreaView style={styles.container}>
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					marginTop: 70,
+					padding: SIZES.paddingLarge,
+					borderBottomWidth: 1,
+					borderBottomColor: COLORS.gray
+				}}
+			>
+				<Text style={{ color: COLORS.white }}>{user.fullName}</Text>
+				<TouchableHighlight
+					style={styles.buttonExit}
+					onPress={logout}
+				>
+					<Text style={{ color: COLORS.white }}>Вийти</Text>
+				</TouchableHighlight>
+			</View>
+			<AppNavigation />
+		</SafeAreaView>
+	)
 }
 
 const styles = StyleSheet.create({

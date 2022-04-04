@@ -12,7 +12,8 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
-        "FOREGROUND_SERVICE"
+        "FOREGROUND_SERVICE",
+        "READ_EXTERNAL_STORAGE"
       ]
     },
     "plugins": [
