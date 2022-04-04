@@ -2,11 +2,21 @@ import { StyleSheet, SafeAreaView, TouchableHighlight, Text, View } from 'react-
 import React from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 import { AppNavigation } from '../navigation/AppNavigation'
-import { screen } from '../constants/screens'
+import { useSelector, useDispatch } from 'react-redux'
+import { setName, setPassword } from '../redux/actions'
 import { clearData } from '../utils/userStorage'
 import { user } from '../data'
 
 export const AppScreen = ({ navigation }) => {
+  const { name, password } = useSelector((state) => state.userReducer)
+  const dispatch = useDispatch()
+
+  const logout = () => {
+    clearData(navigation)
+    dispatch(setName(''))
+    dispatch(setPassword(''))
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -21,7 +31,7 @@ export const AppScreen = ({ navigation }) => {
         }}
       >
         <Text style={{ color: '#fff' }}>{user.fullName}</Text>
-        <TouchableHighlight style={styles.buttonExit} onPress={() => clearData(navigation)}>
+        <TouchableHighlight style={styles.buttonExit} onPress={logout}>
           <Text style={{ color: '#fff' }}>Вийти</Text>
         </TouchableHighlight>
       </View>
@@ -34,7 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.black,
-    height: SIZES.height,
   },
   buttonExit: {
     width: 70,

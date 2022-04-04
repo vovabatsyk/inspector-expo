@@ -1,19 +1,18 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { COLORS, SIZES } from '../constants/theme'
-import { violation_article } from '../data'
+import { COLORS, SIZES } from '../../constants/theme'
+import { violation_name } from '../../data'
 
-export const ModalPickerViolationArticle = (props) => {
+export const ModalPickerViolationName = (props) => {
   const onPresItem = (data) => {
-    props.setViolationArticle(data)
+    props.setViolationName(data)
     props.changeModalVisibility(false)
   }
-
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
         <ScrollView>
-          {violation_article.map((item) => (
+          {violation_name.map((item) => (
             <TouchableOpacity key={item.id} onPress={() => onPresItem(item)} style={styles.item}>
               <View>
                 <Text style={styles.itemText}>{item.title}</Text>
