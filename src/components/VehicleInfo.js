@@ -1,12 +1,17 @@
 import { View, Text, TextInput, StyleSheet, TouchableHighlight, Modal } from 'react-native'
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCarNumber, setCarMark } from '../redux/actions'
+import {
+	setCarNumber,
+	setCarMark,
+	setCarModel
+} from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import { ModalPickerCarMark } from './modals/ModalPickerCarMark'
+import { ModalPickerCarModel } from './modals/ModalPickerCarModel'
 
 export const VehicleInfo = () => {
-	const { carName, carMark } = useSelector(
+	const { carName, carMark, carModel } = useSelector(
 		state => state.violationReducer
 	)
 	const { name, password } = useSelector(state => state.userReducer)
@@ -14,11 +19,16 @@ export const VehicleInfo = () => {
 	const dispatch = useDispatch()
 
 	const [isModalVisible, setIsModalVisible] = useState(false)
+	const [isModelModalVisible, setIsModelModalVisible] =
+		useState(false)
 
 	const changeModalVisibility = bool => {
 		setIsModalVisible(bool)
 	}
 
+	const changeModelModalVisibility = bool => {
+		setIsModelModalVisible(bool)
+	}
 	return (
 		<View style={styles.container}>
 			<View style={{ width: SIZES.width - SIZES.paddingLarge }}>
@@ -44,8 +54,10 @@ export const VehicleInfo = () => {
 						placeholderTextColor={COLORS.gray}
 						placeholder='Марка'
 						style={styles.input}
-						value={carMark}
-						onChangeText={value => dispatch(setCarMark(value))}
+						value={carMark.name}
+						onChangeText={value =>
+							dispatch(setCarMark({ name: value }))
+						}
 					/>
 				</View>
 				<View style={styles.buttonWith}>
@@ -81,12 +93,27 @@ export const VehicleInfo = () => {
 						placeholderTextColor={COLORS.gray}
 						placeholder='Модель'
 						style={styles.input}
+						value={carModel}
+						onChangeText={value => dispatch(setCarModel(value))}
 					/>
 				</View>
 				<View style={styles.buttonWith}>
-					<TouchableHighlight style={styles.button}>
+					<TouchableHighlight
+						style={styles.button}
+						onPress={() => changeModelModalVisibility(true)}
+					>
 						<Text style={styles.buttonText}>==</Text>
 					</TouchableHighlight>
+					<Modal
+						transparent={true}
+						animationType='fade'
+						visible={isModelModalVisible}
+						nRequestClose={() => changeModelModalVisibility(false)}
+					>
+						<ModalPickerCarModel
+							changeModelModalVisibility={changeModelModalVisibility}
+						/>
+					</Modal>
 				</View>
 			</View>
 		</View>

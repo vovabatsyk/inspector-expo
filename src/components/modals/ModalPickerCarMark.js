@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { MARKS_URI, setCarMark } from '../../redux/actions'
-import { vehicles_mark } from '../../data'
 import { COLORS, SIZES } from '../../constants/theme'
 import axios from 'axios'
 
@@ -33,7 +32,7 @@ export const ModalPickerCarMark = props => {
 						<TouchableOpacity
 							key={index}
 							onPress={() => {
-								dispatch(setCarMark(item.name))
+								dispatch(setCarMark(item))
 								props.changeModalVisibility(false)
 							}}
 							style={styles.item}

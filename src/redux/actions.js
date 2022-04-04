@@ -7,10 +7,12 @@ export const SET_CAR_NUMBER = 'SET_CAR_NUMBER'
 export const SET_VIOLATION_ARTICLE = 'SET_VIOLATION_ARTICLE'
 //  адрес порушення
 export const SET_VIOLATION_ADDRESS = 'SET_VIOLATION_ADDRESS'
-
+//  марка авто 
 export const SET_CAR_MARK = 'SET_CAR_MARK'
+//  модель авто
+export const SET_CAR_MODEL = 'SET_CAR_MODEL'
 
-const RIA_API_KEY = 'NU48ngwqFJQ94heGK2ooLcwPZRLNWgRydZ5lVZ1Q'
+export const RIA_API_KEY = 'NU48ngwqFJQ94heGK2ooLcwPZRLNWgRydZ5lVZ1Q'
 export const MARKS_URI = `https://developers.ria.com/auto/categories/1/marks?api_key=${RIA_API_KEY}`
 
 export const setName = name => dispatch => {
@@ -45,6 +47,13 @@ export const setCarMark = carMark => dispatch => {
 	dispatch({
 		type: SET_CAR_MARK,
 		payload: carMark
+	})
+}
+
+export const setCarModel = carModel => dispatch => {
+	dispatch({
+		type: SET_CAR_MODEL,
+		payload: carModel
 	})
 }
 

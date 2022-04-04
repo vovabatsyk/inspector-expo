@@ -4,7 +4,8 @@ import {
 	SET_CAR_NUMBER,
 	SET_VIOLATION_ARTICLE,
 	SET_VIOLATION_ADDRESS,
-	SET_CAR_MARK
+	SET_CAR_MARK,
+	SET_CAR_MODEL
 } from './actions'
 
 const initialUserState = {
@@ -16,11 +17,14 @@ const initialViolationState = {
 	carNumber: '',
 	violationArticle: {
 		title: '',
-		price: 0,
-		payParking: false
+		price: 0
 	},
 	violationAddress: '',
-	carMark: ''
+	carMark: {
+		name: '',
+		value: 1
+	},
+	carModel: ''
 }
 
 export const userReducer = (state = initialUserState, action) => {
@@ -51,6 +55,9 @@ export const violationReducer = (
 
 		case SET_CAR_MARK:
 			return { ...state, carMark: action.payload }
+
+		case SET_CAR_MODEL:
+			return { ...state, carModel: action.payload }
 
 		default:
 			return state
