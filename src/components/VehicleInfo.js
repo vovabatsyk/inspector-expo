@@ -97,24 +97,6 @@ export const VehicleInfo = () => {
 						onChangeText={value => dispatch(setCarModel(value))}
 					/>
 				</View>
-				<View style={styles.buttonWith}>
-					<TouchableHighlight
-						style={styles.button}
-						onPress={() => changeModelModalVisibility(true)}
-					>
-						<Text style={styles.buttonText}>==</Text>
-					</TouchableHighlight>
-					<Modal
-						transparent={true}
-						animationType='fade'
-						visible={isModelModalVisible}
-						nRequestClose={() => changeModelModalVisibility(false)}
-					>
-						<ModalPickerCarModel
-							changeModelModalVisibility={changeModelModalVisibility}
-						/>
-					</Modal>
-				</View>
 			</View>
 		</View>
 	)

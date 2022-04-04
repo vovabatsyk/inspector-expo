@@ -2,6 +2,7 @@ import {
 	View,
 	Text,
 	StyleSheet,
+	TextInput,
 	ScrollView,
 	TouchableOpacity
 } from 'react-native'
@@ -16,6 +17,23 @@ export const ModalPickerCarModel = props => {
 	const { carMark } = useSelector(state => state.violationReducer)
 
 	const [models, setModels] = useState([])
+
+	const searchItem = text => {
+		try {
+			axios
+				.get(
+					`https://developers.ria.com/auto/categories/1/marks/${carMark.value}/models/_group?api_key=${RIA_API_KEY}`
+				)
+				.then(res => {
+					const searchItem = res.data.filter(item =>
+						item.name.toUpperCase().includes(text.toUpperCase())
+					)
+					setModels(searchItem)
+				})
+		} catch (error) {
+			alert(error)
+		}
+	}
 
 	useEffect(() => {
 		try {
@@ -33,21 +51,28 @@ export const ModalPickerCarModel = props => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.modal}>
+				<TextInput
+					style={styles.input}
+					onChangeText={value => searchItem(value)}
+					placeholder='Пошук...'
+					placeholderTextColor={COLORS.gray}
+				/>
 				<ScrollView>
-					{models.map((item, index) => (
-						<TouchableOpacity
-							key={index}
-							onPress={() => {
-								dispatch(setCarModel(item.name))
-								props.changeModelModalVisibility(false)
-							}}
-							style={styles.item}
-						>
-							<View>
-								<Text style={styles.itemText}>{item.name}</Text>
-							</View>
-						</TouchableOpacity>
-					))}
+					{models !== null &&
+						models.map((item, index) => (
+							<TouchableOpacity
+								key={index}
+								onPress={() => {
+									dispatch(setCarModel(item.name))
+									props.changeModelModalVisibility(false)
+								}}
+								style={styles.item}
+							>
+								<View>
+									<Text style={styles.itemText}>{item.name}</Text>
+								</View>
+							</TouchableOpacity>
+						))}
 				</ScrollView>
 				<TouchableOpacity
 					style={styles.buttonCancel}
@@ -66,7 +91,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		position: 'absolute'
 	},
 	modal: {
 		backgroundColor: COLORS.black,
@@ -96,5 +122,13 @@ const styles = StyleSheet.create({
 		padding: SIZES.paddingLarge,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	input: {
+		borderColor: COLORS.gray,
+		borderWidth: 1,
+		padding: SIZES.padding,
+		margin: SIZES.margin,
+		borderRadius: SIZES.radius,
+		color: COLORS.white
 	}
 })
