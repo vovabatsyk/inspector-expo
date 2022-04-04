@@ -1,10 +1,14 @@
 import { View, Text, TouchableHighlight, StyleSheet, TextInput } from 'react-native'
 import * as Location from 'expo-location'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setViolationAddress } from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 
 export const ViolationAddress = () => {
-  const [location, setLocation] = useState(null)
+  const { violationAddress } = useSelector((state) => state.violationReducer)
+
+  const dispatch = useDispatch()
 
   const getLocation = async () => {
     try {
@@ -25,7 +29,7 @@ export const ViolationAddress = () => {
 
         for (let item of response) {
           let address = `${item.street}, ${item.name}`
-          setLocation(address)
+          dispatch(setViolationAddress(address))
         }
       }
     } catch (error) {
@@ -47,8 +51,8 @@ export const ViolationAddress = () => {
             placeholderTextColor={COLORS.gray}
             placeholder='Адреса'
             style={styles.input}
-            value={location}
-            onChangeText={setLocation}
+            value={violationAddress}
+            onChangeText={(value) => dispatch(setViolationAddress(value))}
           />
         </View>
         <View style={styles.buttonWith}>

@@ -1,20 +1,26 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { setViolationArticle } from '../../redux/actions'
 import { COLORS, SIZES } from '../../constants/theme'
 import { violation_article } from '../../data'
 
 export const ModalPickerViolationArticle = (props) => {
-  const onPresItem = (data) => {
-    props.setViolationArticle(data)
-    props.changeModalVisibility(false)
-  }
+  const dispatch = useDispatch()
 
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
         <ScrollView>
           {violation_article.map((item) => (
-            <TouchableOpacity key={item.id} onPress={() => onPresItem(item)} style={styles.item}>
+            <TouchableOpacity
+              key={item.id}
+              onPress={() => {
+                dispatch(setViolationArticle(item))
+                props.changeModalVisibility(false)
+              }}
+              style={styles.item}
+            >
               <View>
                 <Text style={styles.itemText}>{item.title}</Text>
               </View>
