@@ -13,6 +13,10 @@ export const SET_CAR_MARK = 'SET_CAR_MARK'
 export const SET_CAR_MODEL = 'SET_CAR_MODEL'
 //  фабула
 export const SET_VIOLATION_NAME = 'SET_VIOLATION_NAME'
+// uri images
+export const SET_IMAGES = 'SET_IMAGES'
+export const DELETE_IMAGE = 'DELETE_IMAGE'
+
 
 export const RIA_API_KEY = 'NU48ngwqFJQ94heGK2ooLcwPZRLNWgRydZ5lVZ1Q'
 export const MARKS_URI = `https://developers.ria.com/auto/categories/1/marks?api_key=${RIA_API_KEY}`
@@ -59,16 +63,32 @@ export const setCarModel = carModel => dispatch => {
 	})
 }
 
-export const setViolationAddress = (violationAddress) => (dispatch) => {
-  dispatch({
-    type: SET_VIOLATION_ADDRESS,
-    payload: violationAddress,
-  })
+export const setViolationAddress = violationAddress => dispatch => {
+	dispatch({
+		type: SET_VIOLATION_ADDRESS,
+		payload: violationAddress
+	})
 }
 
-export const setViolationName = (violationName) => (dispatch) => {
+export const setViolationName = violationName => dispatch => {
 	dispatch({
-	  type: SET_VIOLATION_NAME,
-	  payload: violationName,
+		type: SET_VIOLATION_NAME,
+		payload: violationName
 	})
-  }
+}
+
+
+export const setImages = imagesUri => dispatch => {	
+	dispatch({
+		type: SET_IMAGES,
+		payload: imagesUri
+	})	
+}
+
+export const deleteImages = imageUri => dispatch => {	
+	dispatch({
+		type: DELETE_IMAGE,
+		payload: imageUri
+	})		
+}
+

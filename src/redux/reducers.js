@@ -6,7 +6,9 @@ import {
 	SET_VIOLATION_ADDRESS,
 	SET_CAR_MARK,
 	SET_CAR_MODEL,
-	SET_VIOLATION_NAME
+	SET_VIOLATION_NAME,
+	SET_IMAGES,
+	DELETE_IMAGE
 } from './actions'
 
 const initialUserState = {
@@ -26,7 +28,8 @@ const initialViolationState = {
 		value: 1
 	},
 	carModel: '',
-	violationName: ''
+	violationName: '',
+	imagesUri: []
 }
 
 export const userReducer = (state = initialUserState, action) => {
@@ -63,6 +66,18 @@ export const violationReducer = (
 
 		case SET_VIOLATION_NAME:
 			return { ...state, violationName: action.payload }
+
+		case SET_IMAGES:
+			return {
+				...state,
+				imagesUri: [...state.imagesUri, action.payload]
+			}
+
+		case DELETE_IMAGE:
+			return {
+				...state,
+				imagesUri: state.imagesUri.filter(i => i !== action.payload)
+			}
 
 		default:
 			return state

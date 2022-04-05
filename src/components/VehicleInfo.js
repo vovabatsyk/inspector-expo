@@ -8,27 +8,20 @@ import {
 } from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import { ModalPickerCarMark } from './modals/ModalPickerCarMark'
-import { ModalPickerCarModel } from './modals/ModalPickerCarModel'
 
 export const VehicleInfo = () => {
-	const { carName, carMark, carModel } = useSelector(
+	const { carNumber, carMark, carModel } = useSelector(
 		state => state.violationReducer
 	)
-	const { name, password } = useSelector(state => state.userReducer)
 
 	const dispatch = useDispatch()
 
 	const [isModalVisible, setIsModalVisible] = useState(false)
-	const [isModelModalVisible, setIsModelModalVisible] =
-		useState(false)
 
 	const changeModalVisibility = bool => {
 		setIsModalVisible(bool)
 	}
 
-	const changeModelModalVisibility = bool => {
-		setIsModelModalVisible(bool)
-	}
 	return (
 		<View style={styles.container}>
 			<View style={{ width: SIZES.width - SIZES.paddingLarge }}>
@@ -37,7 +30,7 @@ export const VehicleInfo = () => {
 					placeholderTextColor={COLORS.gray}
 					placeholder='Державний номерний знак'
 					style={styles.input}
-					value={carName}
+					value={carNumber}
 					onChangeText={value => dispatch(setCarNumber(value))}
 				/>
 			</View>

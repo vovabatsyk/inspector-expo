@@ -9,11 +9,14 @@ import {
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useSelector, useDispatch } from 'react-redux'
+import { setImages, deleteImages } from '../redux/actions'
 
 import { COLORS, SIZES } from '../constants/theme'
 
 export const ViolationImages = () => {
-	const [images, setImages] = useState([])
+	const dispatch = useDispatch()
+	const { imagesUri } = useSelector(state => state.violationReducer)
 
 	const pickImage = async () => {
 		// No permissions request is necessary for launching the image library
@@ -23,15 +26,9 @@ export const ViolationImages = () => {
 		})
 
 		if (!result.cancelled) {
-			setImages(prevState => [result, ...prevState])
+			dispatch(setImages(result.uri))
 		}
 	}
-
-	const deleteImage = uri => {
-		const filteredImages = images.filter(image => image.uri !== uri)
-		setImages(filteredImages)
-	}
-
 	return (
 		<View>
 			<TouchableOpacity
@@ -56,8 +53,8 @@ export const ViolationImages = () => {
 					flexWrap: 'wrap'
 				}}
 			>
-				{images &&
-					images.map((image, index) => (
+				{imagesUri &&
+					imagesUri.map((image, index) => (
 						<View
 							key={index}
 							style={{
@@ -73,12 +70,12 @@ export const ViolationImages = () => {
 						>
 							<Text>
 								<Image
-									source={{ uri: image.uri }}
+									source={{ uri: image }}
 									style={{ width: 100, height: 100 }}
 								/>
 							</Text>
 							<TouchableOpacity
-								onPress={() => deleteImage(image.uri)}
+								onPress={() => dispatch(deleteImages(image))}
 							>
 								<Text>
 									<MaterialCommunityIcons

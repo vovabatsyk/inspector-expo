@@ -3,21 +3,41 @@ import React from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 import { AppNavigation } from '../navigation/AppNavigation'
 import { useSelector, useDispatch } from 'react-redux'
-import { setName, setPassword } from '../redux/actions'
+import {
+	setName,
+	setPassword,
+	setCarMark,
+	setCarModel,
+	setCarNumber,
+	setViolationAddress,
+	setViolationArticle,
+	setViolationName
+} from '../redux/actions'
 import { clearData } from '../utils/userStorage'
 import { user } from '../data'
 
 export const AppScreen = ({ navigation }) => {
-  const { name, password } = useSelector((state) => state.userReducer)
-  const dispatch = useDispatch()
+	const { name, password } = useSelector(state => state.userReducer)
+	const dispatch = useDispatch()
 
-  const logout = () => {
-    clearData(navigation)
-    dispatch(setName(''))
-    dispatch(setPassword(''))
-  }
+	const logout = () => {
+		clearData(navigation)
+		dispatch(setName(''))
+		dispatch(setPassword(''))
+		dispatch(setViolationArticle({ title: '', price: 0 }))
+		dispatch(setCarNumber(''))
+		dispatch(
+			setCarMark({
+				name: '',
+				value: 1
+			})
+		)
+		dispatch(setCarModel(''))
+		dispatch(setViolationName(''))
+		dispatch(setViolationAddress(''))
+	}
 
-  return (
+	return (
 		<SafeAreaView style={styles.container}>
 			<View
 				style={{
