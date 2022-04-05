@@ -1,61 +1,64 @@
 import { View, Text, StyleSheet, TouchableHighlight, TextInput, Modal } from 'react-native'
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setViolationName } from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import { ModalPickerViolationName } from './modals/ModalPickerViolationName'
 
 export const ViolationName = () => {
-  const [selectedViolationName, setSelectedViolationName] = useState('')
-  const [isModalVisible, setIsModalVisible] = useState(false)
-  const [violationData, setViolationData] = useState(null)
+	const { violationName } = useSelector(
+		state => state.violationReducer
+	)
+	const dispatch = useDispatch()
 
-  const changeModalVisibility = (bool) => {
-    setIsModalVisible(bool)
-  }
+	const [isModalVisible, setIsModalVisible] = useState(false)
 
-  const setViolationName = (data) => {
-    setSelectedViolationName(data.description)
-    setViolationData(data)
-  }
-  return (
-    <View style={styles.container}>
-      <View
-        style={{
-          width: SIZES.width - SIZES.paddingLarge,
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-        }}
-      >
-        <View style={styles.inputWith}>
-          <Text style={styles.text}>Фабула</Text>
-          <TextInput
-            placeholderTextColor={COLORS.gray}
-            placeholder='Фабула'
-            style={styles.input}
-            multiline={true}
-            numberOfLines={3}
-            value={selectedViolationName}
-            onChangeText={setSelectedViolationName}
-          />
-        </View>
-        <View style={styles.buttonWith}>
-          <TouchableHighlight style={styles.button} onPress={() => changeModalVisibility(true)}>
-            <Text style={styles.buttonText}>==</Text>
-          </TouchableHighlight>
-          <Modal
-            transparent={true}
-            animationType='fade'
-            visible={isModalVisible}
-            nRequestClose={() => changeModalVisibility(false)}
-          >
-            <ModalPickerViolationName
-              changeModalVisibility={changeModalVisibility}
-              setViolationName={setViolationName}
-            />
-          </Modal>
-        </View>
-      </View>
-    </View>
-  )
+	const changeModalVisibility = bool => {
+		setIsModalVisible(bool)
+	}
+
+	return (
+		<View style={styles.container}>
+			<View
+				style={{
+					width: SIZES.width - SIZES.paddingLarge,
+					flexDirection: 'row',
+					alignItems: 'flex-end'
+				}}
+			>
+				<View style={styles.inputWith}>
+					<Text style={styles.text}>Фабула</Text>
+					<TextInput
+						placeholderTextColor={COLORS.gray}
+						placeholder='Фабула'
+						style={styles.input}
+						multiline={true}
+						numberOfLines={3}
+						value={violationName}
+						onChangeText={value => dispatch(setViolationName(value))}
+					/>
+				</View>
+				<View style={styles.buttonWith}>
+					<TouchableHighlight
+						style={styles.button}
+						onPress={() => changeModalVisibility(true)}
+					>
+						<Text style={styles.buttonText}>==</Text>
+					</TouchableHighlight>
+					<Modal
+						transparent={true}
+						animationType='fade'
+						visible={isModalVisible}
+						nRequestClose={() => changeModalVisibility(false)}
+					>
+						<ModalPickerViolationName
+							changeModalVisibility={changeModalVisibility}
+						/>
+					</Modal>
+				</View>
+			</View>
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({

@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
 import React from 'react'
-import { clearData } from '../utils/userStorage'
 import { COLORS } from '../constants/theme'
 
 export const SettingsScreen = ({ navigation }) => {

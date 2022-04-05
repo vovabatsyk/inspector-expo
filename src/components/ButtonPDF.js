@@ -3,14 +3,23 @@ import React from 'react'
 import * as Print from 'expo-print'
 import { shareAsync } from 'expo-sharing'
 import { COLORS, SIZES } from '../constants/theme'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+	setCarMark,
+	setCarModel,
+	setCarNumber,
+	setViolationAddress,
+	setViolationArticle,
+	setViolationName
+} from '../redux/actions'
 
 export const ButtonPDF = () => {
-  const { carNumber, violationArticle, violationAddress } = useSelector(
-    (state) => state.violationReducer
-  )
+	const dispatch = useDispatch()
 
-  const html = `
+	const { carNumber, violationArticle, violationAddress } =
+		useSelector(state => state.violationReducer)
+
+	const html = `
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
@@ -30,31 +39,57 @@ export const ButtonPDF = () => {
 </html>
 `
 
-  const printToFile = async () => {
-    const { uri } = await Print.printToFileAsync({
-      html,
-    })
-    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' })
-  }
+	const printToFile = async () => {
+		const { uri } = await Print.printToFileAsync({
+			html
+		})
+		await shareAsync(uri, {
+			UTI: '.pdf',
+			mimeType: 'application/pdf'
+		})
+	}
 
-  return (
-    <TouchableHighlight style={styles.button} onPress={printToFile}>
-      <Text style={styles.text}>Створити</Text>
-    </TouchableHighlight>
-  )
+	return (
+		<TouchableHighlight
+			style={styles.button}
+			onPress={() => {
+				alert(`
+      ДНЗ - ${carNumber}
+      ${violationArticle.title}
+      ${violationArticle.price} грн.
+      м. Львів, ${violationAddress}
+      `)
+
+				dispatch(setViolationArticle({ title: '', price: 0 }))
+				dispatch(setCarNumber(''))
+				dispatch(
+					setCarMark({
+						name: '',
+						value: 1
+					})
+				)
+				dispatch(setCarModel(''))
+				dispatch(setViolationName(''))
+				dispatch(setViolationAddress(''))
+			}}
+		>
+			<Text style={styles.text}>Створити</Text>
+		</TouchableHighlight>
+	)
 }
 
 const styles = StyleSheet.create({
-  button: {
-    padding: SIZES.padding,
-    backgroundColor: COLORS.red,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: SIZES.radius,
-    marginTop: SIZES.marginLarge,
-  },
-  text: {
-    fontSize: SIZES.h3,
-    color: COLORS.white,
-  },
+	button: {
+		padding: SIZES.padding,
+		backgroundColor: COLORS.green,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: SIZES.radius,
+		margin: SIZES.marginLarge,
+		padding: SIZES.paddingLarge
+	},
+	text: {
+		fontSize: SIZES.h3,
+		color: COLORS.white
+	}
 })

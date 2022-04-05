@@ -1,93 +1,98 @@
 import { View, Text, TextInput, StyleSheet, TouchableHighlight, Modal } from 'react-native'
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCarNumber } from '../redux/actions'
+import {
+	setCarNumber,
+	setCarMark,
+	setCarModel
+} from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import { ModalPickerCarMark } from './modals/ModalPickerCarMark'
 
 export const VehicleInfo = () => {
-  const { carName } = useSelector((state) => state.violationReducer)
-  const { name, password } = useSelector((state) => state.userReducer)
+	const { carNumber, carMark, carModel } = useSelector(
+		state => state.violationReducer
+	)
 
-  const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-  const [selectedCarMark, setSelectedCarMark] = useState('')
-  const [isModalVisible, setIsModalVisible] = useState(false)
+	const [isModalVisible, setIsModalVisible] = useState(false)
 
-  const changeModalVisibility = (bool) => {
-    setIsModalVisible(bool)
-  }
+	const changeModalVisibility = bool => {
+		setIsModalVisible(bool)
+	}
 
-  const getSelectedCarMark = (data) => {
-    setSelectedCarMark(data.name)
-  }
+	return (
+		<View style={styles.container}>
+			<View style={{ width: SIZES.width - SIZES.paddingLarge }}>
+				<Text style={styles.text}>Державний номерний знак</Text>
+				<TextInput
+					placeholderTextColor={COLORS.gray}
+					placeholder='Державний номерний знак'
+					style={styles.input}
+					value={carNumber}
+					onChangeText={value => dispatch(setCarNumber(value))}
+				/>
+			</View>
+			<View
+				style={{
+					width: SIZES.width - SIZES.paddingLarge,
+					flexDirection: 'row',
+					alignItems: 'flex-end'
+				}}
+			>
+				<View style={styles.inputWith}>
+					<Text style={styles.text}>Марка</Text>
+					<TextInput
+						placeholderTextColor={COLORS.gray}
+						placeholder='Марка'
+						style={styles.input}
+						value={carMark.name}
+						onChangeText={value =>
+							dispatch(setCarMark({ name: value }))
+						}
+					/>
+				</View>
+				<View style={styles.buttonWith}>
+					<TouchableHighlight
+						style={styles.button}
+						onPress={() => changeModalVisibility(true)}
+					>
+						<Text style={styles.buttonText}>==</Text>
+					</TouchableHighlight>
+					<Modal
+						transparent={true}
+						animationType='fade'
+						visible={isModalVisible}
+						nRequestClose={() => changeModalVisibility(false)}
+					>
+						<ModalPickerCarMark
+							changeModalVisibility={changeModalVisibility}
+						/>
+					</Modal>
+				</View>
+			</View>
 
-  return (
-    <View style={styles.container}>
-      <View style={{ width: SIZES.width - SIZES.paddingLarge }}>
-        <Text style={styles.text}>Державний номерний знак</Text>
-        <TextInput
-          placeholderTextColor={COLORS.gray}
-          placeholder='Державний номерний знак'
-          style={styles.input}
-          value={carName}
-          onChangeText={(value) => dispatch(setCarNumber(value))}
-        />
-      </View>
-      <View
-        style={{
-          width: SIZES.width - SIZES.paddingLarge,
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-        }}
-      >
-        <View style={styles.inputWith}>
-          <Text style={styles.text}>Марка</Text>
-          <TextInput
-            placeholderTextColor={COLORS.gray}
-            placeholder='Марка'
-            style={styles.input}
-            value={selectedCarMark}
-            onChangeText={setSelectedCarMark}
-          />
-        </View>
-        <View style={styles.buttonWith}>
-          <TouchableHighlight style={styles.button} onPress={() => changeModalVisibility(true)}>
-            <Text style={styles.buttonText}>==</Text>
-          </TouchableHighlight>
-          <Modal
-            transparent={true}
-            animationType='fade'
-            visible={isModalVisible}
-            nRequestClose={() => changeModalVisibility(false)}
-          >
-            <ModalPickerCarMark
-              changeModalVisibility={changeModalVisibility}
-              getSelectedCarMark={getSelectedCarMark}
-            />
-          </Modal>
-        </View>
-      </View>
-
-      <View
-        style={{
-          width: SIZES.width - SIZES.paddingLarge,
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-        }}
-      >
-        <View style={styles.inputWith}>
-          <Text style={styles.text}>Модель</Text>
-          <TextInput placeholderTextColor={COLORS.gray} placeholder='Модель' style={styles.input} />
-        </View>
-        <View style={styles.buttonWith}>
-          <TouchableHighlight style={styles.button}>
-            <Text style={styles.buttonText}>==</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
-    </View>
-  )
+			<View
+				style={{
+					width: SIZES.width - SIZES.paddingLarge,
+					flexDirection: 'row',
+					alignItems: 'flex-end'
+				}}
+			>
+				<View style={styles.inputWith}>
+					<Text style={styles.text}>Модель</Text>
+					<TextInput
+						placeholderTextColor={COLORS.gray}
+						placeholder='Модель'
+						style={styles.input}
+						value={carModel}
+						onChangeText={value => dispatch(setCarModel(value))}
+					/>
+				</View>
+			</View>
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({

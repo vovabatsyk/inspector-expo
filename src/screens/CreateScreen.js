@@ -11,59 +11,59 @@ import { ViolationArticle } from '../components/ViolationArticle'
 import { ViolationImages } from '../components/ViolationImages'
 
 export const CreateScreen = () => {
-  return (
-    <ScrollView style={styles.backgroundColor}>
-      <View style={styles.containerSize}>
-        <ViolationArticle />
+	return (
+		<ScrollView style={styles.backgroundColor}>
+			<View style={styles.containerSize}>
+				<ViolationArticle />
 
-        <VehicleInfo />
+				<VehicleInfo />
 
-        <View style={styles.delimiter}></View>
+				<View style={styles.delimiter}></View>
 
-        <ViolationName />
+				<ViolationName />
 
-        <View style={styles.delimiter}></View>
+				<View style={styles.delimiter}></View>
 
-        <ViolationAddress />
+				<ViolationAddress />
 
-        <View style={styles.delimiter}></View>
+				<View style={styles.delimiter}></View>
 
-        {/* <ViolationImages />
+				<ViolationImages />
 
-        <View style={styles.delimiter}></View> */}
+				<View style={styles.delimiter}></View>
 
-        <ButtonPDF />
-      </View>
-    </ScrollView>
-  )
+				<ButtonPDF />
+			</View>
+		</ScrollView>
+	)
 }
 
 const styles = StyleSheet.create({
-  backgroundColor: {
-    backgroundColor: COLORS.black,
-  },
-  containerSize: {
-    marginTop: SIZES.marginLarge,
-    padding: SIZES.paddingLarge,
-    height: SIZES.height + 100,
-  },
+	backgroundColor: {
+		backgroundColor: COLORS.black
+	},
+	containerSize: {
+		marginTop: SIZES.marginLarge,
+		padding: SIZES.paddingLarge,
+		height: SIZES.height * 2
+	},
 
-  delimiter: {
-    height: 2,
-    backgroundColor: COLORS.gray,
-    marginTop: SIZES.marginLarge + 10,
-  },
-  text: {
-    color: COLORS.white,
+	delimiter: {
+		height: 2,
+		backgroundColor: COLORS.gray,
+		marginTop: SIZES.marginLarge + 10
+	},
+	text: {
+		color: COLORS.white,
 
-    marginTop: SIZES.marginLarge,
-  },
-  input: {
-    borderColor: COLORS.gray,
-    borderWidth: 1,
-    padding: SIZES.padding,
-    marginTop: SIZES.margin,
-    borderRadius: SIZES.radius,
-    color: COLORS.white,
-  },
+		marginTop: SIZES.marginLarge
+	},
+	input: {
+		borderColor: COLORS.gray,
+		borderWidth: 1,
+		padding: SIZES.padding,
+		marginTop: SIZES.margin,
+		borderRadius: SIZES.radius,
+		color: COLORS.white
+	}
 })
