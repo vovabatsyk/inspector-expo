@@ -1,14 +1,23 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import {
+	View,
+	Text,
+	StyleSheet,
+	ScrollView,
+	TouchableOpacity,
+	ToastAndroid
+} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { MARKS_URI, setCarMark } from '../../redux/actions'
 import { COLORS, SIZES } from '../../constants/theme'
 import axios from 'axios'
 import { InputSearch } from '../InputSearch'
+import { Loader } from '../ui/Loader'
 
 export const ModalPickerCarMark = props => {
 	const dispatch = useDispatch()
 
+	const [loading, setLoading] = useState(true)
 	const [marks, setMarks] = useState([
 		{
 			name: '',
@@ -17,12 +26,14 @@ export const ModalPickerCarMark = props => {
 	])
 
 	const searchItem = text => {
+		setLoading(true)
 		try {
 			axios.get(MARKS_URI).then(res => {
 				const searchItem = res.data.filter(item =>
 					item.name.toUpperCase().includes(text.toUpperCase())
 				)
 				setMarks(searchItem)
+				setLoading(false)
 			})
 		} catch (error) {
 			alert(error)
@@ -33,6 +44,7 @@ export const ModalPickerCarMark = props => {
 		try {
 			axios.get(MARKS_URI).then(res => {
 				setMarks(res.data)
+				setLoading(false)
 			})
 		} catch (error) {
 			alert(error)
@@ -43,23 +55,27 @@ export const ModalPickerCarMark = props => {
 		<View style={styles.container}>
 			<View style={styles.modal}>
 				<InputSearch searchItem={searchItem} />
-				<ScrollView>
-					{marks &&
-						marks.map((item, index) => (
-							<TouchableOpacity
-								key={index}
-								onPress={() => {
-									dispatch(setCarMark(item))
-									props.changeModalVisibility(false)
-								}}
-								style={styles.item}
-							>
-								<View>
-									<Text style={styles.itemText}>{item.name}</Text>
-								</View>
-							</TouchableOpacity>
-						))}
-				</ScrollView>
+				{loading ? (
+					<Loader />
+				) : (
+					<ScrollView>
+						{marks &&
+							marks.map((item, index) => (
+								<TouchableOpacity
+									key={index}
+									onPress={() => {
+										dispatch(setCarMark(item))
+										props.changeModalVisibility(false)
+									}}
+									style={styles.item}
+								>
+									<View>
+										<Text style={styles.itemText}>{item.name}</Text>
+									</View>
+								</TouchableOpacity>
+							))}
+					</ScrollView>
+				)}
 
 				<TouchableOpacity
 					style={styles.buttonCancel}

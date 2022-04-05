@@ -1,4 +1,9 @@
-import { Text, TouchableHighlight, StyleSheet } from 'react-native'
+import {
+	Text,
+	TouchableHighlight,
+	StyleSheet,
+	ToastAndroid
+} from 'react-native'
 import React from 'react'
 import * as Print from 'expo-print'
 import { shareAsync } from 'expo-sharing'
@@ -16,8 +21,13 @@ import {
 export const ButtonPDF = () => {
 	const dispatch = useDispatch()
 
-	const { carNumber, violationArticle, violationAddress } =
-		useSelector(state => state.violationReducer)
+	const {
+		carNumber,
+		violationArticle,
+		violationAddress,
+		carMark,
+		violationName
+	} = useSelector(state => state.violationReducer)
 
 	const html = `
 <html>
@@ -53,24 +63,34 @@ export const ButtonPDF = () => {
 		<TouchableHighlight
 			style={styles.button}
 			onPress={() => {
-				alert(`
-      ДНЗ - ${carNumber}
-      ${violationArticle.title}
-      ${violationArticle.price} грн.
-      м. Львів, ${violationAddress}
-      `)
+				if (
+					carNumber &&
+					violationArticle.title &&
+					violationAddress &&
+					carMark &&
+					violationName
+				) {
+					alert(`
+					ДНЗ - ${carNumber}
+					${violationArticle.title}
+					${violationArticle.price} грн.
+					м. Львів, ${violationAddress}
+					`)
 
-				dispatch(setViolationArticle({ title: '', price: 0 }))
-				dispatch(setCarNumber(''))
-				dispatch(
-					setCarMark({
-						name: '',
-						value: 1
-					})
-				)
-				dispatch(setCarModel(''))
-				dispatch(setViolationName(''))
-				dispatch(setViolationAddress(''))
+					dispatch(setViolationArticle({ title: '', price: 0 }))
+					dispatch(setCarNumber(''))
+					dispatch(
+						setCarMark({
+							name: '',
+							value: 1
+						})
+					)
+					dispatch(setCarModel(''))
+					dispatch(setViolationName(''))
+					dispatch(setViolationAddress(''))
+				} else {
+					ToastAndroid.show('Заповніть всі поля', ToastAndroid.SHORT)
+				}
 			}}
 		>
 			<Text style={styles.text}>Створити</Text>

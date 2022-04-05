@@ -1,11 +1,12 @@
 import {
-  TextInput,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  TouchableHighlight,
-  Image,
+	TextInput,
+	Text,
+	SafeAreaView,
+	StyleSheet,
+	View,
+	TouchableHighlight,
+	Image,
+	ToastAndroid
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -16,62 +17,71 @@ import { customUser, getData, storeData } from '../utils/userStorage'
 import { screen } from '../constants/screens'
 
 export const LoginScreen = ({ navigation }) => {
-  const { name, password } = useSelector((state) => state.userReducer)
-  const dispatch = useDispatch()
+	const { name, password } = useSelector(state => state.userReducer)
+	const dispatch = useDispatch()
 
-  const [userName, setUserName] = useState('')
-  const [userPassword, setUserPassword] = useState('')
+	const isUser = () => {
+		if (
+			name === customUser.name &&
+			password === customUser.password
+		) {
+			storeData('user')
+			navigation.navigate(screen.APP_SCREEN)
+		} else {
+			ToastAndroid.show(
+				'Не правельний логін або пароль',
+				ToastAndroid.SHORT
+			)
+		}
+		dispatch(setName(''))
+		dispatch(setPassword(''))
+	}
 
-  const isUser = () => {
-    if (name === customUser.name && password === customUser.password) {
-      storeData('user')
-      navigation.navigate(screen.APP_SCREEN)
-    } else {
-      alert('Не правельний логін або пароль')
-    }
+	useEffect(() => {
+		getData(navigation)
+	}, [])
+	return (
+		<SafeAreaView style={styles.container}>
+			<Image
+				source={require('../../assets/logo.png')}
+				style={{
+					width: SIZES.width / 4,
+					height: SIZES.height / 5,
+					marginBottom: 30
+				}}
+			/>
+			<View style={styles.inputWrapper}>
+				<Icon name='user' size={30} color={COLORS.secondary} />
+				<TextInput
+					style={styles.input}
+					placeholder='логін'
+					value={name}
+					placeholderTextColor={COLORS.secondary}
+					onChangeText={e => dispatch(setName(e))}
+				/>
+			</View>
+			<View style={styles.inputWrapper}>
+				<Icon name='user-secret' size={30} color={COLORS.secondary} />
 
-    // setUserName('')
-    // setUserPassword('')
-  }
-
-  useEffect(() => {
-    getData(navigation)
-  }, [])
-  return (
-    <SafeAreaView style={styles.container}>
-      <Image
-        source={require('../../assets/logo.png')}
-        style={{ width: SIZES.width / 4, height: SIZES.height / 5, marginBottom: 30 }}
-      />
-      <View style={styles.inputWrapper}>
-        <Icon name='user' size={30} color={COLORS.secondary} />
-        <TextInput
-          style={styles.input}
-          placeholder='логін'
-          value={name}
-          placeholderTextColor={COLORS.secondary}
-          onChangeText={(e) => dispatch(setName(e))}
-        />
-      </View>
-      <View style={styles.inputWrapper}>
-        <Icon name='user-secret' size={30} color={COLORS.secondary} />
-
-        <TextInput
-          style={styles.input}
-          placeholder='пароль'
-          placeholderTextColor={COLORS.secondary}
-          secureTextEntry
-          value={password}
-          onChangeText={(e) => dispatch(setPassword(e))}
-        />
-      </View>
-      <View style={styles.buttonWrapper}>
-        <TouchableHighlight style={styles.button} onPress={() => isUser()}>
-          <Text style={styles.buttonText}>Вхід</Text>
-        </TouchableHighlight>
-      </View>
-    </SafeAreaView>
-  )
+				<TextInput
+					style={styles.input}
+					placeholder='пароль'
+					placeholderTextColor={COLORS.secondary}
+					secureTextEntry
+					value={password}
+					onChangeText={e => dispatch(setPassword(e))}
+				/>
+			</View>
+			<View style={styles.buttonWrapper}>
+				<TouchableHighlight
+					style={styles.button}
+					onPress={() => isUser()}
+				>
+					<Text style={styles.buttonText}>Вхід</Text>
+				</TouchableHighlight>
+			</View>
+		</SafeAreaView>
+	)
 }
 
 const styles = StyleSheet.create({
