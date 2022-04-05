@@ -38,10 +38,20 @@ export const ButtonPDF = () => {
   }
 
   return (
-    <TouchableHighlight style={styles.button} onPress={printToFile}>
-      <Text style={styles.text}>Створити</Text>
-    </TouchableHighlight>
-  )
+		<TouchableHighlight
+			style={styles.button}
+			onPress={() =>
+				alert(`
+      ДНЗ - ${carNumber}
+      ${violationArticle.title}
+      ${violationArticle.price} грн.
+      м. Львів, ${violationAddress}
+      `)
+			}
+		>
+			<Text style={styles.text}>Створити</Text>
+		</TouchableHighlight>
+	)
 }
 
 const styles = StyleSheet.create({

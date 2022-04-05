@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { MARKS_URI, setCarMark } from '../../redux/actions'
 import { COLORS, SIZES } from '../../constants/theme'
 import axios from 'axios'
-import { TextInput } from 'react-native-gesture-handler'
+import { InputSearch } from '../InputSearch'
 
 export const ModalPickerCarMark = props => {
 	const dispatch = useDispatch()
@@ -42,12 +42,7 @@ export const ModalPickerCarMark = props => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.modal}>
-				<TextInput
-					style={styles.input}
-					onChangeText={value => searchItem(value)}
-					placeholder='Пошук...'
-					placeholderTextColor={COLORS.gray}
-				/>
+				<InputSearch searchItem={searchItem} />
 				<ScrollView>
 					{marks &&
 						marks.map((item, index) => (
@@ -114,13 +109,5 @@ const styles = StyleSheet.create({
 		padding: SIZES.paddingLarge,
 		justifyContent: 'center',
 		alignItems: 'center'
-	},
-	input: {
-		borderColor: COLORS.gray,
-		borderWidth: 1,
-		padding: SIZES.padding,
-		margin: SIZES.margin,
-		borderRadius: SIZES.radius,
-		color: COLORS.white
 	}
 })

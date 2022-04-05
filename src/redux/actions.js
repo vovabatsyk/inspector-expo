@@ -11,6 +11,8 @@ export const SET_VIOLATION_ADDRESS = 'SET_VIOLATION_ADDRESS'
 export const SET_CAR_MARK = 'SET_CAR_MARK'
 //  модель авто
 export const SET_CAR_MODEL = 'SET_CAR_MODEL'
+//  фабула
+export const SET_VIOLATION_NAME = 'SET_VIOLATION_NAME'
 
 export const RIA_API_KEY = 'NU48ngwqFJQ94heGK2ooLcwPZRLNWgRydZ5lVZ1Q'
 export const MARKS_URI = `https://developers.ria.com/auto/categories/1/marks?api_key=${RIA_API_KEY}`
@@ -63,3 +65,10 @@ export const setViolationAddress = (violationAddress) => (dispatch) => {
     payload: violationAddress,
   })
 }
+
+export const setViolationName = (violationName) => (dispatch) => {
+	dispatch({
+	  type: SET_VIOLATION_NAME,
+	  payload: violationName,
+	})
+  }
