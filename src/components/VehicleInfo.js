@@ -8,6 +8,7 @@ import {
 } from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import { ModalPickerCarMark } from './modals/ModalPickerCarMark'
+import { ButtonAction } from './ui/ButtonAction'
 
 export const VehicleInfo = () => {
 	const { carNumber, carMark, carModel } = useSelector(
@@ -54,12 +55,15 @@ export const VehicleInfo = () => {
 					/>
 				</View>
 				<View style={styles.buttonWith}>
-					<TouchableHighlight
+					<ButtonAction
+						changeModalVisibility={changeModalVisibility}
+					/>
+					{/* <TouchableHighlight
 						style={styles.button}
 						onPress={() => changeModalVisibility(true)}
 					>
 						<Text style={styles.buttonText}>==</Text>
-					</TouchableHighlight>
+					</TouchableHighlight> */}
 					<Modal
 						transparent={true}
 						animationType='fade'

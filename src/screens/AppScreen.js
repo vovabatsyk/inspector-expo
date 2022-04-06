@@ -1,4 +1,11 @@
-import { StyleSheet, SafeAreaView, TouchableHighlight, Text, View } from 'react-native'
+import {
+	StyleSheet,
+	SafeAreaView,
+	TouchableHighlight,
+	Text,
+	View,
+	ToastAndroid
+} from 'react-native'
 import React from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 import { AppNavigation } from '../navigation/AppNavigation'
@@ -35,6 +42,7 @@ export const AppScreen = ({ navigation }) => {
 		dispatch(setCarModel(''))
 		dispatch(setViolationName(''))
 		dispatch(setViolationAddress(''))
+		ToastAndroid.show('Ви вийшли з програми', ToastAndroid.SHORT)
 	}
 
 	return (
@@ -64,15 +72,15 @@ export const AppScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.black,
-  },
-  buttonExit: {
-    width: 70,
-    backgroundColor: COLORS.red,
-    alignItems: 'center',
-    borderRadius: SIZES.radius,
-    padding: 7,
-  },
+	container: {
+		flex: 1,
+		backgroundColor: COLORS.black
+	},
+	buttonExit: {
+		width: 70,
+		backgroundColor: COLORS.red,
+		alignItems: 'center',
+		borderRadius: SIZES.radius,
+		padding: 7
+	}
 })

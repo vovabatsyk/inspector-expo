@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setViolationName } from '../redux/actions'
 import { COLORS, SIZES } from '../constants/theme'
 import { ModalPickerViolationName } from './modals/ModalPickerViolationName'
+import { ButtonAction } from './ui/ButtonAction'
 
 export const ViolationName = () => {
 	const { violationName } = useSelector(
@@ -39,12 +40,9 @@ export const ViolationName = () => {
 					/>
 				</View>
 				<View style={styles.buttonWith}>
-					<TouchableHighlight
-						style={styles.button}
-						onPress={() => changeModalVisibility(true)}
-					>
-						<Text style={styles.buttonText}>==</Text>
-					</TouchableHighlight>
+					<ButtonAction
+						changeModalVisibility={changeModalVisibility}
+					/>
 					<Modal
 						transparent={true}
 						animationType='fade'

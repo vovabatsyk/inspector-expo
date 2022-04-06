@@ -11,12 +11,14 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { COLORS, SIZES } from '../../constants/theme'
 import { RIA_API_KEY, setCarModel } from '../../redux/actions'
+import { Loader } from '../ui/Loader'
 
 export const ModalPickerCarModel = props => {
 	const dispatch = useDispatch()
 	const { carMark } = useSelector(state => state.violationReducer)
 
 	const [models, setModels] = useState([])
+	const [loading, setLoading] = useState(true)
 
 	const searchItem = text => {
 		try {
@@ -30,6 +32,7 @@ export const ModalPickerCarModel = props => {
 					)
 					setModels(searchItem)
 				})
+			setLoading(false)
 		} catch (error) {
 			alert(error)
 		}
@@ -57,23 +60,28 @@ export const ModalPickerCarModel = props => {
 					placeholder='Пошук...'
 					placeholderTextColor={COLORS.gray}
 				/>
-				<ScrollView>
-					{models !== null &&
-						models.map((item, index) => (
-							<TouchableOpacity
-								key={index}
-								onPress={() => {
-									dispatch(setCarModel(item.name))
-									props.changeModelModalVisibility(false)
-								}}
-								style={styles.item}
-							>
-								<View>
-									<Text style={styles.itemText}>{item.name}</Text>
-								</View>
-							</TouchableOpacity>
-						))}
-				</ScrollView>
+				{loading ? (
+					<Loader />
+				) : (
+					<ScrollView>
+						{models !== null &&
+							models.map((item, index) => (
+								<TouchableOpacity
+									key={index}
+									onPress={() => {
+										dispatch(setCarModel(item.name))
+										props.changeModelModalVisibility(false)
+									}}
+									style={styles.item}
+								>
+									<View>
+										<Text style={styles.itemText}>{item.name}</Text>
+									</View>
+								</TouchableOpacity>
+							))}
+					</ScrollView>
+				)}
+
 				<TouchableOpacity
 					style={styles.buttonCancel}
 					onPress={() => props.changeModelModalVisibility(false)}

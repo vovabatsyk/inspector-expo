@@ -1,9 +1,15 @@
-import { Text, TouchableHighlight, StyleSheet } from 'react-native'
+import {
+	Text,
+	TouchableHighlight,
+	StyleSheet,
+	ToastAndroid
+} from 'react-native'
 import React from 'react'
 import * as Print from 'expo-print'
 import { shareAsync } from 'expo-sharing'
 import { COLORS, SIZES } from '../constants/theme'
 import { useSelector, useDispatch } from 'react-redux'
+import { violationHtml } from '../data'
 import {
 	setCarMark,
 	setCarModel,
@@ -16,32 +22,39 @@ import {
 export const ButtonPDF = () => {
 	const dispatch = useDispatch()
 
-	const { carNumber, violationArticle, violationAddress } =
-		useSelector(state => state.violationReducer)
+	const {
+		carNumber,
+		violationArticle,
+		violationAddress,
+		carMark,
+		carModel,
+		violationName
+	} = useSelector(state => state.violationReducer)
 
-	const html = `
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-  </head>
-  <body style="text-align: center;">
-    <h1 style="font-size: 50px; font-family: Helvetica Neue; font-weight: normal;">
-      Hello Expo!
-    </h1>
-    <img
-      src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
-      style="width: 90vw;" />
-    ${carNumber}
-    ${violationArticle.title}
-    ${violationArticle.price}
-    ${violationAddress}
-  </body>
-</html>
-`
+	const html = violationHtml(
+		'223042121',
+		'Бацик Володимир Васильович',
+		carMark.name,
+		carModel,
+		carNumber,
+		'22.03.2021 12:21:122',
+		violationAddress,
+		violationName,
+		violationArticle.title,
+		violationArticle.price,
+		'Samsung S10'
+	)
 
 	const printToFile = async () => {
 		const { uri } = await Print.printToFileAsync({
-			html
+			html,
+			margins: {
+				left: 0,
+				top: 10,
+				right: 0,
+				bottom: 10
+			},
+			height: 1600
 		})
 		await shareAsync(uri, {
 			UTI: '.pdf',
@@ -53,27 +66,20 @@ export const ButtonPDF = () => {
 		<TouchableHighlight
 			style={styles.button}
 			onPress={() => {
-				alert(`
-      ДНЗ - ${carNumber}
-      ${violationArticle.title}
-      ${violationArticle.price} грн.
-      м. Львів, ${violationAddress}
-      `)
-
-				dispatch(setViolationArticle({ title: '', price: 0 }))
-				dispatch(setCarNumber(''))
-				dispatch(
-					setCarMark({
-						name: '',
-						value: 1
-					})
-				)
-				dispatch(setCarModel(''))
-				dispatch(setViolationName(''))
-				dispatch(setViolationAddress(''))
+				if (
+					carNumber &&
+					violationArticle.title &&
+					violationAddress &&
+					carMark &&
+					violationName
+				) {
+					printToFile()
+				} else {
+					ToastAndroid.show('Заповніть всі поля', ToastAndroid.SHORT)
+				}
 			}}
 		>
-			<Text style={styles.text}>Створити</Text>
+			<Text style={styles.text}>Роздрукувати</Text>
 		</TouchableHighlight>
 	)
 }
@@ -81,7 +87,7 @@ export const ButtonPDF = () => {
 const styles = StyleSheet.create({
 	button: {
 		padding: SIZES.padding,
-		backgroundColor: COLORS.green,
+		backgroundColor: COLORS.red,
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: SIZES.radius,

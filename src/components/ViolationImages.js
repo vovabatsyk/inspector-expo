@@ -19,7 +19,6 @@ export const ViolationImages = () => {
 	const { imagesUri } = useSelector(state => state.violationReducer)
 
 	const pickImage = async () => {
-		// No permissions request is necessary for launching the image library
 		let result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
 			quality: 1
