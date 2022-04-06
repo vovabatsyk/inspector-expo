@@ -9,6 +9,7 @@ import { ViolationName } from '../components/ViolationName'
 import { ViolationAddress } from '../components/ViolationAddress'
 import { ViolationArticle } from '../components/ViolationArticle'
 import { ViolationImages } from '../components/ViolationImages'
+import { ButtonSave } from '../components/ui/ButtonSave'
 
 export const CreateScreen = () => {
 	return (
@@ -33,6 +34,8 @@ export const CreateScreen = () => {
 				<View style={styles.delimiter}></View>
 
 				<ButtonPDF />
+
+				<ButtonSave />
 			</View>
 		</ScrollView>
 	)
