@@ -7,9 +7,9 @@ import {
 import React from 'react'
 import * as Print from 'expo-print'
 import { shareAsync } from 'expo-sharing'
-import { COLORS, SIZES } from '../constants/theme'
+import { COLORS, SIZES } from '../../constants/theme'
 import { useSelector, useDispatch } from 'react-redux'
-import { violationHtml } from '../data'
+import { violationHtml } from '../../data'
 import {
 	setCarMark,
 	setCarModel,
@@ -17,10 +17,10 @@ import {
 	setViolationAddress,
 	setViolationArticle,
 	setViolationName
-} from '../redux/actions'
-import { getDateNow } from '../utils/getDate'
+} from '../../redux/actions'
+import { getDateNow } from '../../utils/getDate'
 
-export const ButtonPDF = () => {
+export const ButtonPDF = ({ size, text, color }) => {
 	const dispatch = useDispatch()
 
 	const {
@@ -58,9 +58,9 @@ export const ButtonPDF = () => {
 				top: 0,
 				right: 0,
 				bottom: 0
-			}
+			},
 
-			// height: 1600
+			height: size
 		})
 		await shareAsync(uri, {
 			UTI: '.pdf',
@@ -70,7 +70,7 @@ export const ButtonPDF = () => {
 
 	return (
 		<TouchableHighlight
-			style={styles.button}
+			style={[{ ...styles.button, backgroundColor: color }]}
 			onPress={() => {
 				if (
 					carNumber &&
@@ -85,7 +85,7 @@ export const ButtonPDF = () => {
 				}
 			}}
 		>
-			<Text style={styles.text}>Роздрукувати</Text>
+			<Text style={styles.text}>{text}</Text>
 		</TouchableHighlight>
 	)
 }
@@ -93,7 +93,6 @@ export const ButtonPDF = () => {
 const styles = StyleSheet.create({
 	button: {
 		padding: SIZES.padding,
-		backgroundColor: COLORS.red,
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: SIZES.radius,

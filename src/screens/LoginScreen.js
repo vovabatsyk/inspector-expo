@@ -43,7 +43,7 @@ export const LoginScreen = ({ navigation }) => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Image
-				source={require('../../assets/logo.png')}
+				source={require('../../assets/app-logo.png')}
 				style={{
 					width: SIZES.width / 4,
 					height: SIZES.height / 5,

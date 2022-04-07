@@ -24,7 +24,9 @@ import { clearData } from '../utils/userStorage'
 import { user } from '../data'
 
 export const AppScreen = ({ navigation }) => {
-	const { name, password } = useSelector(state => state.userReducer)
+	const { name, password, fullName } = useSelector(
+		state => state.userReducer
+	)
 	const dispatch = useDispatch()
 
 	const logout = () => {
@@ -58,7 +60,7 @@ export const AppScreen = ({ navigation }) => {
 					borderBottomColor: COLORS.gray
 				}}
 			>
-				<Text style={{ color: COLORS.white }}>{user.fullName}</Text>
+				<Text style={{ color: COLORS.white }}>{fullName}</Text>
 				<TouchableHighlight
 					style={styles.buttonExit}
 					onPress={logout}
