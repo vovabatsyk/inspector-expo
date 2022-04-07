@@ -8,12 +8,15 @@ import {
 	SET_CAR_MODEL,
 	SET_VIOLATION_NAME,
 	SET_IMAGES,
-	DELETE_IMAGE
+	DELETE_IMAGE,
+	PHOTO_DEVICE,
+	SET_FULL_NAME
 } from './actions'
 
 const initialUserState = {
 	name: '',
-	password: ''
+	password: '',
+	fullName: 'Бацик Володимир Васильович'
 }
 
 const initialViolationState = {
@@ -29,13 +32,18 @@ const initialViolationState = {
 	},
 	carModel: '',
 	violationName: '',
-	imagesUri: []
+	imagesUri: [],
+	photoDevice: 'Samsung S10'
 }
 
 export const userReducer = (state = initialUserState, action) => {
 	switch (action.type) {
 		case SET_NAME:
 			return { ...state, name: action.payload }
+
+		case SET_FULL_NAME:
+			return { ...state, fullName: action.payload }
+
 		case SET_PASSWORD:
 			return { ...state, password: action.payload }
 
@@ -78,6 +86,9 @@ export const violationReducer = (
 				...state,
 				imagesUri: state.imagesUri.filter(i => i !== action.payload)
 			}
+
+		case PHOTO_DEVICE:
+			return { ...state, photoDevice: action.payload }
 
 		default:
 			return state

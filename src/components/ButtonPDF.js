@@ -18,6 +18,7 @@ import {
 	setViolationArticle,
 	setViolationName
 } from '../redux/actions'
+import { getDateNow } from '../utils/getDate'
 
 export const ButtonPDF = () => {
 	const dispatch = useDispatch()
@@ -28,21 +29,25 @@ export const ButtonPDF = () => {
 		violationAddress,
 		carMark,
 		carModel,
-		violationName
+		violationName,
+		photoDevice
 	} = useSelector(state => state.violationReducer)
+	const { fullName } = useSelector(state => state.userReducer)
+
+	const date = getDateNow()
 
 	const html = violationHtml(
+		date,
 		'223042121',
-		'Бацик Володимир Васильович',
+		fullName,
 		carMark.name,
 		carModel,
 		carNumber,
-		'22.03.2021 12:21:122',
 		violationAddress,
 		violationName,
 		violationArticle.title,
 		violationArticle.price,
-		'Samsung S10'
+		photoDevice
 	)
 
 	const printToFile = async () => {

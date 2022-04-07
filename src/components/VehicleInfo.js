@@ -58,12 +58,6 @@ export const VehicleInfo = () => {
 					<ButtonAction
 						changeModalVisibility={changeModalVisibility}
 					/>
-					{/* <TouchableHighlight
-						style={styles.button}
-						onPress={() => changeModalVisibility(true)}
-					>
-						<Text style={styles.buttonText}>==</Text>
-					</TouchableHighlight> */}
 					<Modal
 						transparent={true}
 						animationType='fade'
