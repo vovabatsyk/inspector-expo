@@ -1,9 +1,7 @@
-import { Text, StyleSheet, ScrollView, TextInput, View, Modal } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, ScrollView, View } from 'react-native'
+import React from 'react'
 import { COLORS, SIZES } from '../constants/theme'
-import { ButtonPDF } from '../components/ButtonPDF'
-import { ModalPickerViolationArticle } from '../components/modals/ModalPickerViolationArticle'
-import { ViolationPrice } from '../components/ViolationPrice'
+import { ButtonPDF } from '../components/ui/ButtonPDF'
 import { VehicleInfo } from '../components/VehicleInfo'
 import { ViolationName } from '../components/ViolationName'
 import { ViolationAddress } from '../components/ViolationAddress'
@@ -33,7 +31,23 @@ export const CreateScreen = () => {
 
 				<View style={styles.delimiter}></View>
 
-				<ButtonPDF />
+				<View
+					style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between'
+					}}
+				>
+					<ButtonPDF
+						size={800}
+						text={'Зберегти PDF'}
+						color={COLORS.gray}
+					/>
+					<ButtonPDF
+						size={1600}
+						text={'Роздрукувати'}
+						color={COLORS.red}
+					/>
+				</View>
 
 				<ButtonSave />
 			</View>
@@ -55,18 +69,5 @@ const styles = StyleSheet.create({
 		height: 2,
 		backgroundColor: COLORS.gray,
 		marginTop: SIZES.marginLarge + 10
-	},
-	text: {
-		color: COLORS.white,
-
-		marginTop: SIZES.marginLarge
-	},
-	input: {
-		borderColor: COLORS.gray,
-		borderWidth: 1,
-		padding: SIZES.padding,
-		marginTop: SIZES.margin,
-		borderRadius: SIZES.radius,
-		color: COLORS.white
 	}
 })
