@@ -53,6 +53,20 @@ export const FONTS = {
   body5: { fontFamily: 'Roboto-Regular', fontSize: SIZES.body5, lineHeight: 22 },
 }
 
-const appTheme = { COLORS, SIZES, FONTS }
+export const lightTheme = {
+	mode: 'light',
+	BACKGROUND_COLOR: COLORS.lightGray1,
+	TEXT_COLOR: COLORS.black,
+	BUTTON_COLOR: COLORS.lightGray,
+	BACKGROUND_COLOR_NAV: COLORS.lightGray,
+	BACKGROUND_COLOR_MODAL: COLORS.gray
+}
 
-export default appTheme
+export const darkTheme = {
+	mode: 'dark',
+	BACKGROUND_COLOR: COLORS.black,
+	TEXT_COLOR: COLORS.lightGray,
+	BUTTON_COLOR: COLORS.gray,
+	BACKGROUND_COLOR_NAV: COLORS.black,
+	BACKGROUND_COLOR_MODAL: COLORS.black
+}

@@ -6,6 +6,10 @@ import {
 	TouchableOpacity,
 	ToastAndroid
 } from 'react-native'
+import {
+	ViewContainerModal,
+	ViewContainer
+} from '../../constants/styles'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { MARKS_URI, setCarMark } from '../../redux/actions'
@@ -52,8 +56,8 @@ export const ModalPickerCarMark = props => {
 	}, [])
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.modal}>
+		<ViewContainer style={styles.container}>
+			<ViewContainerModal style={styles.modal}>
 				<InputSearch searchItem={searchItem} />
 				{loading ? (
 					<Loader />
@@ -85,8 +89,8 @@ export const ModalPickerCarMark = props => {
 						Скасувати
 					</Text>
 				</TouchableOpacity>
-			</View>
-		</View>
+			</ViewContainerModal>
+		</ViewContainer>
 	)
 }
 
@@ -98,10 +102,9 @@ const styles = StyleSheet.create({
 		position: 'absolute'
 	},
 	modal: {
-		backgroundColor: COLORS.black,
 		borderRadius: SIZES.radius,
-		width: SIZES.width - SIZES.marginLarge,
-		height: SIZES.height - SIZES.marginLarge,
+		width: SIZES.width,
+		height: SIZES.height,
 		borderWidth: 2,
 		borderColor: COLORS.secondary,
 		paddingTop: SIZES.paddingLarge

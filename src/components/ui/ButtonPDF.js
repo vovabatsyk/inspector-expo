@@ -59,9 +59,8 @@ export const ButtonPDF = ({ size, text, color }) => {
 				right: 0,
 				bottom: 0
 			},
-
 			height: size
-		})
+		})		
 		await shareAsync(uri, {
 			UTI: '.pdf',
 			mimeType: 'application/pdf'

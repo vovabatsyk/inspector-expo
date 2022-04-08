@@ -8,14 +8,14 @@ export const InputSearch = ({ searchItem }) => {
 			style={styles.input}
 			onChangeText={value => searchItem(value)}
 			placeholder='Пошук...'
-			placeholderTextColor={COLORS.gray}
+			placeholderTextColor={COLORS.lightGray}
 		/>
 	)
 }
 
 const styles = StyleSheet.create({
 	input: {
-		borderColor: COLORS.gray,
+		borderColor: COLORS.secondary,
 		borderWidth: 1,
 		padding: SIZES.padding,
 		margin: SIZES.margin,
