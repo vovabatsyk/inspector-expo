@@ -6,6 +6,10 @@ import {
 	ScrollView,
 	TouchableOpacity
 } from 'react-native'
+import {
+	ViewContainerModal,
+	ViewContainer
+} from '../../constants/styles'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -52,8 +56,8 @@ export const ModalPickerCarModel = props => {
 		}
 	}, [])
 	return (
-		<View style={styles.container}>
-			<View style={styles.modal}>
+		<ViewContainer style={styles.container}>
+			<ViewContainerModal style={styles.modal}>
 				<TextInput
 					style={styles.input}
 					onChangeText={value => searchItem(value)}
@@ -90,8 +94,8 @@ export const ModalPickerCarModel = props => {
 						Скасувати
 					</Text>
 				</TouchableOpacity>
-			</View>
-		</View>
+			</ViewContainerModal>
+		</ViewContainer>
 	)
 }
 
@@ -103,10 +107,9 @@ const styles = StyleSheet.create({
 		position: 'absolute'
 	},
 	modal: {
-		backgroundColor: COLORS.black,
 		borderRadius: SIZES.radius,
-		width: SIZES.width - SIZES.marginLarge,
-		height: SIZES.height - SIZES.marginLarge,
+		width: SIZES.width,
+		height: SIZES.height,
 		borderWidth: 2,
 		borderColor: COLORS.secondary,
 		paddingTop: SIZES.paddingLarge

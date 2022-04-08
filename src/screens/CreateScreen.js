@@ -1,5 +1,6 @@
 import { StyleSheet, ScrollView, View } from 'react-native'
 import React from 'react'
+// import styled from 'styled-components/native'
 import { COLORS, SIZES } from '../constants/theme'
 import { ButtonPDF } from '../components/ui/ButtonPDF'
 import { VehicleInfo } from '../components/VehicleInfo'
@@ -8,10 +9,11 @@ import { ViolationAddress } from '../components/ViolationAddress'
 import { ViolationArticle } from '../components/ViolationArticle'
 import { ViolationImages } from '../components/ViolationImages'
 import { ButtonSave } from '../components/ui/ButtonSave'
+import { Container } from '../constants/styles'
 
-export const CreateScreen = () => {
+export const CreateScreen = props => {
 	return (
-		<ScrollView style={styles.backgroundColor}>
+		<Container>
 			<View style={styles.containerSize}>
 				<ViolationArticle />
 
@@ -51,7 +53,7 @@ export const CreateScreen = () => {
 
 				<ButtonSave />
 			</View>
-		</ScrollView>
+		</Container>
 	)
 }
 
@@ -60,9 +62,9 @@ const styles = StyleSheet.create({
 		backgroundColor: COLORS.black
 	},
 	containerSize: {
-		marginTop: SIZES.marginLarge,
+		marginTop: 0,
 		padding: SIZES.paddingLarge,
-		height: SIZES.height * 2
+		height: SIZES.height * 1.8
 	},
 
 	delimiter: {
