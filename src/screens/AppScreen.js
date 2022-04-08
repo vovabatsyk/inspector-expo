@@ -1,88 +1,22 @@
-import {
-	StyleSheet,
-	SafeAreaView,
-	TouchableHighlight,
-	Text,
-	View,
-	ToastAndroid
-} from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
-import { COLORS, SIZES } from '../constants/theme'
+import { COLORS } from '../constants/theme'
 import { AppNavigation } from '../navigation/AppNavigation'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-	setName,
-	setPassword,
-	setCarMark,
-	setCarModel,
-	setCarNumber,
-	setViolationAddress,
-	setViolationArticle,
-	setViolationName
-} from '../redux/actions'
-import { clearData } from '../utils/userStorage'
-import { user } from '../data'
+import { HeaderContainer } from '../constants/styles'
+
+import { Header } from '../components/Header'
 
 export const AppScreen = ({ navigation }) => {
-	const { name, password, fullName } = useSelector(
-		state => state.userReducer
-	)
-	const dispatch = useDispatch()
-
-	const logout = () => {
-		clearData(navigation)
-		dispatch(setName(''))
-		dispatch(setPassword(''))
-		dispatch(setViolationArticle({ title: '', price: 0 }))
-		dispatch(setCarNumber(''))
-		dispatch(
-			setCarMark({
-				name: '',
-				value: 1
-			})
-		)
-		dispatch(setCarModel(''))
-		dispatch(setViolationName(''))
-		dispatch(setViolationAddress(''))
-		ToastAndroid.show('Ви вийшли з програми', ToastAndroid.SHORT)
-	}
-
 	return (
-		<SafeAreaView style={styles.container}>
-			<View
-				style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					marginTop: 70,
-					padding: SIZES.paddingLarge,
-					borderBottomWidth: 1,
-					borderBottomColor: COLORS.gray
-				}}
-			>
-				<Text style={{ color: COLORS.white }}>{fullName}</Text>
-				<TouchableHighlight
-					style={styles.buttonExit}
-					onPress={logout}
-				>
-					<Text style={{ color: COLORS.white }}>Вийти</Text>
-				</TouchableHighlight>
-			</View>
+		<HeaderContainer style={styles.container}>
+			<Header navigation={navigation} />
 			<AppNavigation />
-		</SafeAreaView>
+		</HeaderContainer>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: COLORS.black
-	},
-	buttonExit: {
-		width: 70,
-		backgroundColor: COLORS.red,
-		alignItems: 'center',
-		borderRadius: SIZES.radius,
-		padding: 7
+		flex: 1
 	}
 })

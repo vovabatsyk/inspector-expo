@@ -2,7 +2,10 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setViolationName } from '../../redux/actions'
-
+import {
+	ViewContainerModal,
+	ViewContainer
+} from '../../constants/styles'
 import { COLORS, SIZES } from '../../constants/theme'
 import { violation_name } from '../../data'
 import { InputSearch } from '../InputSearch'
@@ -24,8 +27,8 @@ export const ModalPickerViolationName = props => {
 	}
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.modal}>
+		<ViewContainer style={styles.container}>
+			<ViewContainerModal style={styles.modal}>
 				<InputSearch searchItem={searchItem} />
 				<ScrollView>
 					{violationsName.map(item => (
@@ -51,8 +54,8 @@ export const ModalPickerViolationName = props => {
 						Скасувати
 					</Text>
 				</TouchableOpacity>
-			</View>
-		</View>
+			</ViewContainerModal>
+		</ViewContainer>
 	)
 }
 
@@ -64,10 +67,9 @@ const styles = StyleSheet.create({
 		position: 'absolute'
 	},
 	modal: {
-		backgroundColor: COLORS.black,
 		borderRadius: SIZES.radius,
-		width: SIZES.width - SIZES.marginLarge,
-		height: SIZES.height - SIZES.marginLarge,
+		width: SIZES.width,
+		height: SIZES.height,
 		borderWidth: 2,
 		borderColor: COLORS.secondary,
 		paddingTop: SIZES.paddingLarge

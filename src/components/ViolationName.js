@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, TouchableHighlight, TextInput, Modal } from 'react-native'
+import { View, StyleSheet, Modal } from 'react-native'
+import { Text, TextInput } from '../constants/styles'
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setViolationName } from '../redux/actions'
@@ -28,7 +29,7 @@ export const ViolationName = () => {
 				}}
 			>
 				<View style={styles.inputWith}>
-					<Text style={styles.text}>Фабула</Text>
+					<Text>Фабула</Text>
 					<TextInput
 						placeholderTextColor={COLORS.gray}
 						placeholder='Фабула'
@@ -60,41 +61,35 @@ export const ViolationName = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  text: {
-    color: COLORS.white,
-    marginTop: SIZES.marginLarge,
-  },
-  input: {
-    borderColor: COLORS.gray,
-    borderWidth: 1,
-    padding: SIZES.padding,
-    marginTop: SIZES.margin,
-    borderRadius: SIZES.radius,
-    color: COLORS.white,
-    maxHeight: 100,
-  },
-  inputWith: {
-    width: '80%',
-  },
-  button: {
-    backgroundColor: COLORS.gray,
-    alignItems: 'center',
-    borderRadius: SIZES.radius,
-    justifyContent: 'center',
-    height: SIZES.icon,
-    marginLeft: SIZES.margin,
-  },
-  buttonWith: {
-    width: '15%',
-  },
-  buttonText: {
-    color: COLORS.white,
-    fontSize: SIZES.h2,
-  },
+	container: {
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'space-between'
+	},
+	input: {
+		borderColor: COLORS.gray,
+		borderWidth: 1,
+		padding: SIZES.padding,
+		marginTop: SIZES.margin,
+		borderRadius: SIZES.radius,
+		maxHeight: 100
+	},
+	inputWith: {
+		width: '85%'
+	},
+	button: {
+		backgroundColor: COLORS.gray,
+		alignItems: 'center',
+		borderRadius: SIZES.radius,
+		justifyContent: 'center',
+		height: SIZES.icon,
+		marginLeft: SIZES.margin
+	},
+	buttonWith: {
+		width: '15%'
+	},
+	buttonText: {
+		color: COLORS.white,
+		fontSize: SIZES.h2
+	}
 })

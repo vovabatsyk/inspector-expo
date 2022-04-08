@@ -1,4 +1,5 @@
-import { View, Text, TextInput, StyleSheet, TouchableHighlight, Modal } from 'react-native'
+import { View, StyleSheet, Modal } from 'react-native'
+import { Text, TextInput } from '../constants/styles'
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -26,7 +27,7 @@ export const VehicleInfo = () => {
 	return (
 		<View style={styles.container}>
 			<View style={{ width: SIZES.width - SIZES.paddingLarge }}>
-				<Text style={styles.text}>Державний номерний знак</Text>
+				<Text>Державний номерний знак</Text>
 				<TextInput
 					placeholderTextColor={COLORS.gray}
 					placeholder='Державний номерний знак'
@@ -43,7 +44,7 @@ export const VehicleInfo = () => {
 				}}
 			>
 				<View style={styles.inputWith}>
-					<Text style={styles.text}>Марка</Text>
+					<Text>Марка</Text>
 					<TextInput
 						placeholderTextColor={COLORS.gray}
 						placeholder='Марка'
@@ -79,7 +80,7 @@ export const VehicleInfo = () => {
 				}}
 			>
 				<View style={styles.inputWith}>
-					<Text style={styles.text}>Модель</Text>
+					<Text>Модель</Text>
 					<TextInput
 						placeholderTextColor={COLORS.gray}
 						placeholder='Модель'
@@ -94,40 +95,34 @@ export const VehicleInfo = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  text: {
-    color: COLORS.white,
-    marginTop: SIZES.marginLarge,
-  },
-  input: {
-    borderColor: COLORS.gray,
-    borderWidth: 1,
-    padding: SIZES.padding,
-    marginTop: SIZES.margin,
-    borderRadius: SIZES.radius,
-    color: COLORS.white,
-  },
-  inputWith: {
-    width: '80%',
-  },
-  button: {
-    backgroundColor: COLORS.gray,
-    alignItems: 'center',
-    borderRadius: SIZES.radius,
-    justifyContent: 'center',
-    height: SIZES.icon,
-    marginLeft: SIZES.margin,
-  },
-  buttonWith: {
-    width: '15%',
-  },
-  buttonText: {
-    color: COLORS.white,
-    fontSize: SIZES.h2,
-  },
+	container: {
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'space-between'
+	},
+	input: {
+		borderColor: COLORS.gray,
+		borderWidth: 1,
+		padding: SIZES.padding,
+		marginTop: SIZES.margin,
+		borderRadius: SIZES.radius
+	},
+	inputWith: {
+		width: '85%'
+	},
+	button: {
+		backgroundColor: COLORS.gray,
+		alignItems: 'center',
+		borderRadius: SIZES.radius,
+		justifyContent: 'center',
+		height: SIZES.icon,
+		marginLeft: SIZES.margin
+	},
+	buttonWith: {
+		width: '15%'
+	},
+	buttonText: {
+		color: COLORS.white,
+		fontSize: SIZES.h2
+	}
 })

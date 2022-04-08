@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, StyleSheet, TextInput } from 'react-native'
+import { Text } from '../constants/styles'
 import React from 'react'
 import { COLORS, SIZES } from '../constants/theme'
 
@@ -11,9 +12,7 @@ export const ViolationPrice = ({ price }) => {
 					borderColor: price === 0 ? COLORS.red : COLORS.green
 				}}
 			>
-				<Text style={{ color: COLORS.white }}>
-					До сплати {price} грн.
-				</Text>
+				<Text style={{ marginTop: 0 }}>До сплати {price} грн.</Text>
 			</View>
 		</View>
 	)
@@ -21,7 +20,6 @@ export const ViolationPrice = ({ price }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: COLORS.black,
 		padding: SIZES.paddingLarge,
 		borderWidth: 2,
 		borderRadius: SIZES.radius,

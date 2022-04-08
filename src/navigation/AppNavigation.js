@@ -5,7 +5,6 @@ import { CreateScreen } from '../screens/CreateScreen'
 import { StatisticsScreen } from '../screens/StatisticsScreen'
 import { SettingsScreen } from '../screens/SettingsScreen'
 import { COLORS, SIZES } from '../constants/theme'
-import { View } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 

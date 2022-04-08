@@ -14,9 +14,9 @@ import {
 } from './actions'
 
 const initialUserState = {
-	name: '',
-	password: '',
-	fullName: 'Бацик Володимир Васильович'
+	name: 'admin',
+	password: 'admin',
+	fullName: "Прізвище Ім'я По-батькові"
 }
 
 const initialViolationState = {
